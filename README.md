@@ -1,46 +1,43 @@
-# Astro Starter Kit: Basics
+# Agape Collection Parfum
 
-```sh
-npm create astro@latest -- --template basics
+Perfumería online para el mercado venezolano. Catálogo de fragancias de caballero, damas, unisex y sets. Carrito con persistencia local, cambio de moneda USD/BS y pedidos por WhatsApp.
+
+## Stack
+
+- **Astro 6** — SSG + layout
+- **Vue 3** + **Pinia** — componentes interactivos y estado global
+- **Tailwind CSS v4** — estilos con tema personalizado
+- **lucide-vue-next** — iconos
+
+## Scripts
+
+| Comando | Acción |
+|---------|--------|
+| `npm run dev` | Servidor local en `localhost:4321` |
+| `npm run build` | Build a `./dist/` |
+| `npm run preview` | Vista previa del build |
+
+No hay scripts de lint ni typecheck.
+
+## Estructura
+
+```
+src/
+├── components/   → Vue SFC (Navbar, CartDrawer, ProductCard, etc.)
+├── composables/  → useDevice.ts
+├── data/         → productos.ts (array estático con interfaz Producto)
+├── layouts/      → Layout.astro
+├── pages/        → index.astro (SPA)
+├── plugins/      → pinia.ts (instancia explícita)
+├── stores/       → cartStore.ts + currencyStore.ts
+└── styles/       → global.css (tema Tailwind)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Arquitectura
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Página única con filtrado por categoría/búsqueda vía `URLSearchParams`
+- Pinia debe importarse con la instancia explícita: `useXxxStore(pinia)`
+- Moneda fija a 700 Bs/USD, toggle sincronizado entre stores
+- Carrito persiste en localStorage bajo clave `agape-cart-items`
+- Checkout genera mensaje de WhatsApp al `+584127050149`
+- Modales responsive: `ProductModalMobile.vue` (<768px) y `ProductModalDesktop.vue` (>=768px)

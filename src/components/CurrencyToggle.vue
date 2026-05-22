@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
+import { DollarSign } from 'lucide-vue-next'
 
 const currencyStore = useCurrencyStore(pinia)
 </script>
@@ -13,7 +14,7 @@ const currencyStore = useCurrencyStore(pinia)
       ? 'bg-cream-100 text-brown-700 hover:bg-cream-200' 
       : 'bg-brown-600 text-cream-100 hover:bg-brown-500'"
   >
-    <span class="text-sm">💵</span>
+    <DollarSign :size="14" />
     <span>{{ currencyStore.currency === 'USD' ? 'USD' : 'BS' }}</span>
     <span class="text-[10px] opacity-60">▼</span>
   </button>

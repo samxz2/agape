@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import type { Producto } from '../data/productos'
+import { TASA_CAMBIO, WHATSAPP_NUMERO } from '../data/config'
 
 export interface CartItem extends Producto {
   cantidad: number
@@ -33,7 +34,9 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>(loadCartFromStorage())
   const isOpen = ref(false)
   const currentCurrency = ref<'USD' | 'BS'>('USD')
-  const tasaCambio = ref(700)
+  const tasaCambio = ref(TASA_CAMBIO)
+  const toastMessage = ref('')
+  let toastTimer: ReturnType<typeof setTimeout>
 
   const totalItems = computed(() =>
     items.value.reduce((acc, item) => acc + item.cantidad, 0)
@@ -76,6 +79,13 @@ export const useCartStore = defineStore('cart', () => {
       items.value.push({ ...producto, cantidad: 1 })
     }
     isOpen.value = true
+    showToast(`${producto.nombre} añadido al carrito`)
+  }
+
+  function showToast(msg: string) {
+    toastMessage.value = msg
+    clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => { toastMessage.value = '' }, 2500)
   }
 
   function eliminarDelCarrito(id: number) {
@@ -103,7 +113,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function generarMensajeWhatsapp() {
-    const numero = '584127050149'
+    const numero = WHATSAPP_NUMERO
     const moneda = currentCurrency.value === 'USD' ? 'USD' : 'Bs.'
     
     let mensaje = '🌸 *Hola, quiero realizar un pedido en Agape Collection Parfum:*\n\n'
@@ -143,6 +153,7 @@ export const useCartStore = defineStore('cart', () => {
     totalPriceBS,
     currentCurrency,
     tasaCambio,
+    toastMessage,
     getPrecioFormateado,
     setCurrency,
     agregarAlCarrito,

@@ -2,10 +2,11 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useCartStore } from './cartStore'
 import { pinia } from '../plugins/pinia'
+import { TASA_CAMBIO } from '../data/config'
 
 export const useCurrencyStore = defineStore('currency', () => {
   const currency = ref<'USD' | 'BS'>('USD')
-  const tasaCambio = ref(700)
+  const tasaCambio = ref(TASA_CAMBIO)
 
   const simbolo = computed(() => currency.value === 'USD' ? '$' : 'Bs.')
   

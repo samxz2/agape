@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useCartStore } from '../stores/cartStore'
 import { pinia } from '../plugins/pinia'
 import { ShoppingBag, Search, Menu, X } from 'lucide-vue-next'
@@ -16,22 +16,39 @@ const categorias = [
   {
     label: 'Caballero',
     value: 'caballero',
-    svg: ''
+    paths: [
+      'M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z',
+      'M2 22c0-5 5-8 10-8s10 3 10 8'
+    ]
   },
   {
     label: 'Damas',
     value: 'dama',
-    svg: ''
+    paths: [
+      'M12 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
+      'M6 21v-6a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v6',
+      'M8 14s-2-2-4-2',
+      'M16 14s2-2 4-2',
+      'M9 5a3 3 0 0 1 6 0'
+    ]
   },
   {
     label: 'Unisex',
     value: 'unisex',
-    svg: ''
+    paths: [
+      'M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z',
+      'M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z',
+      'M5 16l.9 2.1L8 19l-2.1.9L5 22l-.9-2.1L2 19l2.1-.9L5 16z'
+    ]
   },
   {
     label: 'Sets',
     value: 'sets',
-    svg: ''
+    paths: [
+      'M3 8V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2',
+      'M3 8v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8',
+      'M12 6v14'
+    ]
   },
 ]
 
@@ -46,6 +63,10 @@ onUnmounted(() => {
 function handleScroll() {
   isScrolled.value = window.scrollY > 10
 }
+
+watch(menuOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
 
 function irACategoria(cat: string) {
   window.location.href = `/?categoria=${cat}`
@@ -69,58 +90,64 @@ function buscar() {
         : 'bg-brown-900'
     ]"
   >
-    <!-- TOP -->
-    <div class="max-w-7xl mx-auto px-4 py-3">
-      <div class="flex items-center justify-between gap-3">
+    <!-- TOP ROW -->
+    <div class="max-w-7xl mx-auto px-4 py-2">
+      <div class="flex items-center justify-between gap-2">
 
         <!-- LOGO -->
-        <a href="/" class="flex items-center gap-3 shrink-0">
+        <a href="/" class="flex items-center gap-2 shrink-0">
           <img
             src="https://i.ibb.co/CpHdX08t/1001879919.png"
             alt="Agape Collection"
-            class="h-10 md:h-12 w-auto drop-shadow-lg"
+            class="h-8 md:h-10 w-auto drop-shadow-lg"
+            onerror="this.style.display='none'"
           />
-
           <div class="leading-tight">
-            <h1 class="font-playfair text-sm md:text-lg text-cream-50 font-bold tracking-wide">
+            <h1 class="font-playfair text-xs md:text-base text-cream-50 font-bold tracking-wide">
               Agape Collection
             </h1>
-
-            <p class="text-[9px] md:text-[11px] uppercase tracking-[0.35em] text-cream-300/70">
+            <p class="text-[8px] md:text-[10px] uppercase tracking-[0.35em] text-cream-300/70">
               Parfum
             </p>
           </div>
         </a>
 
-        <!-- SEARCH DESKTOP -->
-        <div class="hidden md:flex flex-1 max-w-lg mx-5">
-          <form @submit.prevent="buscar" class="relative w-full">
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Buscar perfume..."
-              class="w-full bg-white/5 border border-white/10 focus:border-gold-300/50 text-cream-100 placeholder:text-cream-300/40 rounded-full px-5 py-3 pr-12 text-sm outline-none backdrop-blur-xl transition-all duration-300"
-            />
-
-            <button
-              type="submit"
-              class="absolute right-4 top-1/2 -translate-y-1/2 text-cream-300/50 hover:text-cream-100 transition-colors"
+        <!-- CATEGORIAS (desktop, in place of search) -->
+        <div class="hidden md:flex flex-1 items-center justify-center gap-1">
+          <button
+            v-for="cat in categorias"
+            :key="cat.value"
+            @click="irACategoria(cat.value)"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs text-cream-200 hover:text-white hover:bg-white/10 transition-all duration-200 whitespace-nowrap"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              <Search :size="18" />
-            </button>
-          </form>
+              <path v-for="path in cat.paths" :key="path" :d="path"/>
+            </svg>
+            {{ cat.label }}
+          </button>
         </div>
 
         <!-- ACTIONS -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1">
           <CurrencyToggle />
 
-          <!-- SEARCH MOBILE -->
+          <!-- SEARCH toggle (desktop + mobile) -->
           <button
             @click="searchOpen = !searchOpen"
-            class="md:hidden text-cream-200 hover:text-white transition-all duration-300 p-2 rounded-xl hover:bg-white/10"
+            class="text-cream-200 hover:text-white transition-all duration-300 p-2 rounded-xl hover:bg-white/10"
+            :class="{ 'bg-white/10 text-white': searchOpen }"
           >
-            <Search :size="20" />
+            <Search :size="18" />
           </button>
 
           <!-- CART -->
@@ -128,88 +155,46 @@ function buscar() {
             @click="cart.toggleCart()"
             class="relative text-cream-200 hover:text-white transition-all duration-300 p-2 rounded-xl hover:bg-white/10"
           >
-            <ShoppingBag :size="21" />
-
+            <ShoppingBag :size="19" />
             <span
               v-if="cart.totalItems > 0"
-              class="absolute -top-1 -right-1 bg-gold-300 text-brown-900 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-lg"
+              class="absolute -top-1 -right-1 bg-gold-300 text-brown-900 text-[10px] font-bold rounded-full min-w-[16px] h-[16px] flex items-center justify-center px-1 shadow-lg"
             >
               {{ cart.totalItems }}
             </span>
           </button>
 
-          <!-- MENU -->
+          <!-- HAMBURGER (mobile) -->
           <button
             @click="menuOpen = !menuOpen"
             class="md:hidden text-cream-200 hover:text-white transition-all duration-300 p-2 rounded-xl hover:bg-white/10"
           >
-            <Menu v-if="!menuOpen" :size="22" />
-            <X v-else :size="22" />
-          </button>
-        </div>
-      </div>
-
-      <!-- CATEGORIAS DESKTOP -->
-      <div class="hidden md:flex justify-center mt-5">
-        <div
-          class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-2 backdrop-blur-xl"
-        >
-          <button
-            v-for="cat in categorias"
-            :key="cat.value"
-            @click="irACategoria(cat.value)"
-            class="group flex items-center gap-2 px-5 py-2 rounded-full text-sm text-cream-200 hover:text-white hover:bg-gradient-to-r hover:from-brown-700 hover:to-brown-600 transition-all duration-300"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="group-hover:scale-110 transition-transform duration-300"
-            >
-              <path :d="cat.svg"/>
-            </svg>
-
-            <span class="font-medium tracking-wide">
-              {{ cat.label }}
-            </span>
+            <Menu v-if="!menuOpen" :size="20" />
+            <X v-else :size="20" />
           </button>
         </div>
       </div>
     </div>
 
-    <!-- SEARCH MOBILE -->
+    <!-- SEARCH BAR (desktop always visible, mobile collapsible) -->
     <div
-      v-if="searchOpen"
-      class="md:hidden border-t border-white/5 bg-brown-900/95 backdrop-blur-xl px-4 py-4"
+      class="border-t border-white/5 bg-brown-900/95 backdrop-blur-xl"
+      :class="searchOpen ? 'block' : 'hidden md:block'"
     >
-      <form @submit.prevent="buscar" class="flex gap-2">
-        <div class="relative flex-1">
+      <div class="max-w-3xl mx-auto px-4 py-2">
+        <form @submit.prevent="buscar" class="relative">
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Buscar perfume..."
-            class="w-full bg-white/5 border border-white/10 text-cream-100 placeholder:text-cream-300/40 rounded-2xl pl-4 pr-10 py-3 text-sm outline-none"
+            placeholder="Buscar perfume por nombre..."
+            class="w-full bg-white/5 border border-white/10 focus:border-gold-300/50 text-cream-100 placeholder:text-cream-300/40 rounded-full pl-10 pr-4 py-2 text-xs md:text-sm outline-none transition-all duration-300"
           />
-
           <Search
-            :size="18"
-            class="absolute right-3 top-1/2 -translate-y-1/2 text-cream-300/40"
+            :size="14"
+            class="absolute left-3.5 top-1/2 -translate-y-1/2 text-cream-300/40"
           />
-        </div>
-
-        <button
-          type="submit"
-          class="bg-gradient-to-r from-brown-700 to-brown-600 hover:from-brown-600 hover:to-brown-500 text-cream-50 px-5 rounded-2xl text-sm font-semibold transition-all duration-300"
-        >
-          Buscar
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
 
     <!-- OVERLAY -->
@@ -248,7 +233,7 @@ function buscar() {
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <path :d="cat.svg"/>
+                <path v-for="path in cat.paths" :key="path" :d="path"/>
               </svg>
             </div>
 
