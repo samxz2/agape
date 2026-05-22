@@ -726,5 +726,33 @@ export const productos: Producto[] = [
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
     imagen: "https://i.ibb.co/r27jvm90/6f5ee4e01726a35fbd8bef78889a308b.jpg"
+  },
+    {
+    id: 52,
+    nombre: "LATTAFA ATLAS EDP 55ML CABALLERO",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://ibb.co/pjjLPT3W"
+  },
+    {
+    id: 53,
+    nombre: "CIEL JACQUES SAINT PRES EDP 100 ML DAMA",
+    categoria: "dama",
+    precio: 20,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://ibb.co/Dfj4f8Mh"
   }
 ]
