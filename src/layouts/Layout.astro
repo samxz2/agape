@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Navbar from '../components/Navbar.vue'
 import CartDrawer from '../components/CartDrawer.vue'
 import ToastBar from '../components/ToastBar.vue'
+import Analytics from '@vercel/analytics/astro'
 
 interface Props {
   title?: string
@@ -49,7 +50,7 @@ const { title = 'Agape Collection Parfum' } = Astro.props
     </main>
     <footer class="bg-brown-800 text-cream-100 text-center py-6 mt-16 text-sm">
       <p class="font-playfair text-lg mb-1">Agape Collection Parfum</p>
-      <p class="opacity-70">© 2025 · Todos los derechos reservados</p>
+      <p class="opacity-70">© 2026 · Todos los derechos reservados</p>
     </footer>
   </body>
 </html>
