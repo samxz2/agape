@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useCartStore, type CartItem } from '../stores/cartStore'
-import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
 import { FALLBACK_IMAGE } from '../data/constants'
 import { X, Trash2, Plus, Minus, ShoppingBag, MessageCircle, Shield, Truck } from 'lucide-vue-next'
