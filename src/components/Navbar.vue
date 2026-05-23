@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useCartStore } from '../stores/cartStore'
 import { pinia } from '../plugins/pinia'
 import { ShoppingBag, Search, Menu, X } from 'lucide-vue-next'
+import CurrencyToggle from './CurrencyToggle.vue'
 
 const cart = useCartStore(pinia)
 

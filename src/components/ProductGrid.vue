@@ -2,7 +2,6 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { productos, type Producto } from '../data/productos'
 import ProductCard from './ProductCard.vue'
-import ClientOnly from './ClientOnly.vue'
 import { Search, Grid3X3, List, ArrowUpDown, ArrowUp, ArrowDown, Percent } from 'lucide-vue-next'
 
 const categoriaActiva = ref('todos')
@@ -81,9 +80,10 @@ function toggleSort() {
 </script>
 
 <template>
-  <ClientOnly>
+  <div>
     <!-- Filters Bar -->
     <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
+      <!-- Search -->
       <div class="relative w-full sm:w-72">
         <Search :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-brown-400" />
         <input
@@ -94,13 +94,16 @@ function toggleSort() {
         />
       </div>
 
+      <!-- Sort + View Toggle -->
       <div class="flex items-center gap-2">
+        <!-- Sort button -->
         <button
           @click="toggleSort"
           class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border"
           :class="ordenPor !== 'default'
             ? 'bg-brown-700 text-cream-50 border-brown-700'
             : 'bg-white text-brown-500 border-brown-200 hover:bg-brown-100'"
+          :title="ordenPor === 'default' ? 'Ordenar por precio' : ordenPor === 'precio-asc' ? 'Menor precio primero' : 'Mayor precio primero'"
         >
           <ArrowUpDown v-if="ordenPor === 'default'" :size="14" />
           <ArrowUp v-else-if="ordenPor === 'precio-asc'" :size="14" />
@@ -127,6 +130,7 @@ function toggleSort() {
       </div>
     </div>
 
+    <!-- Categorías + Ofertas -->
     <div class="overflow-x-auto pb-2 mb-6 -mx-4 px-4">
       <div class="flex gap-2 min-w-max">
         <button
@@ -141,6 +145,7 @@ function toggleSort() {
           {{ cat.label }}
         </button>
 
+        <!-- Ofertas toggle -->
         <button
           v-if="ofertasCount > 0"
           @click="soloOfertas = !soloOfertas"
@@ -156,6 +161,7 @@ function toggleSort() {
       </div>
     </div>
 
+    <!-- Header -->
     <div class="flex items-center justify-between mb-6">
       <div>
         <h2 class="font-playfair text-xl md:text-2xl font-bold text-brown-800 capitalize">
@@ -167,7 +173,11 @@ function toggleSort() {
       </div>
     </div>
 
-    <div v-if="productosFiltrados.length === 0" class="text-center py-20">
+    <!-- Sin resultados -->
+    <div
+      v-if="productosFiltrados.length === 0"
+      class="text-center py-20"
+    >
       <div class="w-20 h-20 bg-brown-100 rounded-full flex items-center justify-center mx-auto mb-4">
         <Search :size="30" class="text-brown-400" />
       </div>
@@ -181,12 +191,13 @@ function toggleSort() {
       </button>
     </div>
 
+    <!-- Grid -->
     <div v-else>
       <TransitionGroup
         tag="div"
         :class="viewMode === 'grid'
-          ? 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4'
-          : 'flex flex-col gap-3'"
+          ? 'relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4'
+          : 'relative flex flex-col gap-3'"
         name="product-grid"
       >
         <ProductCard
@@ -197,7 +208,7 @@ function toggleSort() {
         />
       </TransitionGroup>
     </div>
-  </ClientOnly>
+  </div>
 </template>
 
 <style scoped>
