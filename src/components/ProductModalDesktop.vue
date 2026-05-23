@@ -4,7 +4,6 @@ import { X, ShoppingCart, Shield, Truck, Package, Minus, Plus } from 'lucide-vue
 import type { Producto } from '../data/productos'
 import { productos } from '../data/productos'
 import { FALLBACK_IMAGE } from '../data/constants'
-import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
 import ClientOnly from './ClientOnly.vue'
 
