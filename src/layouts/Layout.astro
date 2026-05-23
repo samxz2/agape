@@ -42,8 +42,8 @@ const { title = 'Agape Collection Parfum' } = Astro.props
   </head>
   <body class="bg-cream-50 text-brown-800 min-h-screen">
     <Navbar client:load />
-    <CartDrawer client:load />
-    <ToastBar client:load />
+    <CartDrawer client:idle />
+    <ToastBar client:idle />
     <main>
       <slot />
     </main>

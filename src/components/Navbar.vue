@@ -53,15 +53,22 @@ const categorias = [
 ]
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
+let scrollTick = false
 function handleScroll() {
-  isScrolled.value = window.scrollY > 10
+  if (!scrollTick) {
+    requestAnimationFrame(() => {
+      isScrolled.value = window.scrollY > 10
+      scrollTick = false
+    })
+    scrollTick = true
+  }
 }
 
 watch(menuOpen, (open) => {
@@ -84,9 +91,9 @@ function buscar() {
 <template>
   <header
     :class="[
-      'sticky top-0 z-50 transition-all duration-500',
+      'sticky top-0 z-50 transition-colors duration-300',
       isScrolled
-        ? 'bg-brown-900/95 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)]'
+        ? 'bg-brown-900 shadow-[0_10px_40px_rgba(0,0,0,0.15)]'
         : 'bg-brown-900'
     ]"
   >
