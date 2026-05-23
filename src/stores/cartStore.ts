@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import type { Producto } from '../data/productos'
-import { TASA_CAMBIO, WHATSAPP_NUMERO } from '../data/config'
+import { WHATSAPP_NUMERO } from '../data/config'
 
 export interface CartItem extends Producto {
   cantidad: number
