@@ -3,7 +3,10 @@ import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
 import { DollarSign } from 'lucide-vue-next'
 
-const currencyStore = useCurrencyStore(pinia)
+// Inicializar el store con pinia
+const currencyStore = useCurrencyStore()
+// Activar pinia para esta instancia
+currencyStore.$pinia = pinia
 </script>
 
 <template>
