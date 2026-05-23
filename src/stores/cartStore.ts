@@ -34,7 +34,6 @@ export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>(loadCartFromStorage())
   const isOpen = ref(false)
   const currentCurrency = ref<'USD' | 'BS'>('USD')
-  const tasaCambio = ref(TASA_CAMBIO)
   const toastMessage = ref('')
   let toastTimer: ReturnType<typeof setTimeout>
 
@@ -47,10 +46,6 @@ export const useCartStore = defineStore('cart', () => {
       const precio = item.enOferta && item.precioOferta ? item.precioOferta : item.precio
       return acc + precio * item.cantidad
     }, 0)
-  )
-
-  const totalPriceBS = computed(() =>
-    totalPriceUSD.value * tasaCambio.value
   )
 
   // Guardar en localStorage cada vez que cambien los items
@@ -66,8 +61,7 @@ export const useCartStore = defineStore('cart', () => {
     if (currentCurrency.value === 'USD') {
       return `$${precioUSD.toFixed(2)}`
     } else {
-      const precioBS = (precioUSD * tasaCambio.value)
-      return `Bs. ${precioBS.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      return `Bs. ${precioUSD.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
     }
   }
 
@@ -114,7 +108,6 @@ export const useCartStore = defineStore('cart', () => {
 
   function generarMensajeWhatsapp() {
     const numero = WHATSAPP_NUMERO
-    const moneda = currentCurrency.value === 'USD' ? 'USD' : 'Bs.'
     
     let mensaje = '🌸 *Hola, quiero realizar un pedido en Agape Collection Parfum:*\n\n'
 
@@ -122,11 +115,11 @@ export const useCartStore = defineStore('cart', () => {
       const precioUSD = item.enOferta && item.precioOferta ? item.precioOferta : item.precio
       const precioMoneda = currentCurrency.value === 'USD' 
         ? `$${precioUSD.toFixed(2)}` 
-        : `Bs. ${(precioUSD * tasaCambio.value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        : `Bs. ${precioUSD.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
       
       const subtotalMoneda = currentCurrency.value === 'USD'
         ? `$${(precioUSD * item.cantidad).toFixed(2)}`
-        : `Bs. ${(precioUSD * tasaCambio.value * item.cantidad).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+        : `Bs. ${(precioUSD * item.cantidad).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
 
       mensaje += `▪️ *${item.nombre}*\n`
       mensaje += `   Cantidad: ${item.cantidad}\n`
@@ -136,7 +129,7 @@ export const useCartStore = defineStore('cart', () => {
 
     const totalMoneda = currentCurrency.value === 'USD'
       ? `$${totalPriceUSD.value.toFixed(2)}`
-      : `Bs. ${totalPriceBS.value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+      : `Bs. ${totalPriceUSD.value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
 
     mensaje += `💰 *Total: ${totalMoneda}*\n\n`
     mensaje += `Quedo atento/a para coordinar el pago y envío. ¡Gracias! 🙏`
@@ -150,9 +143,7 @@ export const useCartStore = defineStore('cart', () => {
     isOpen,
     totalItems,
     totalPriceUSD,
-    totalPriceBS,
     currentCurrency,
-    tasaCambio,
     toastMessage,
     getPrecioFormateado,
     setCurrency,
