@@ -10,6 +10,7 @@ export interface CartItem extends Producto {
 const CART_STORAGE_KEY = 'agape-cart-items'
 
 function loadCartFromStorage(): CartItem[] {
+  if (typeof localStorage === 'undefined') return []
   try {
     const stored = localStorage.getItem(CART_STORAGE_KEY)
     if (stored) {
@@ -22,6 +23,7 @@ function loadCartFromStorage(): CartItem[] {
 }
 
 function saveCartToStorage(items: CartItem[]) {
+  if (typeof localStorage === 'undefined') return
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
   } catch (e) {
@@ -105,7 +107,9 @@ export const useCartStore = defineStore('cart', () => {
 
   function vaciarCarrito() {
     items.value = []
-    localStorage.removeItem(CART_STORAGE_KEY)
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(CART_STORAGE_KEY)
+    }
   }
 
   function toggleCart() {
