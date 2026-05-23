@@ -9,13 +9,7 @@ export interface CartItem extends Producto {
 
 const CART_STORAGE_KEY = 'agape-cart-items'
 
-// 🔥 Verificar si estamos en el cliente
-const isClient = typeof window !== 'undefined'
-
 function loadCartFromStorage(): CartItem[] {
-  // 🛡️ Proteger acceso a localStorage en SSR
-  if (!isClient) return []
-  
   try {
     const stored = localStorage.getItem(CART_STORAGE_KEY)
     if (stored) {
@@ -28,9 +22,6 @@ function loadCartFromStorage(): CartItem[] {
 }
 
 function saveCartToStorage(items: CartItem[]) {
-  // 🛡️ Proteger acceso a localStorage en SSR
-  if (!isClient) return
-  
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
   } catch (e) {
@@ -114,9 +105,7 @@ export const useCartStore = defineStore('cart', () => {
 
   function vaciarCarrito() {
     items.value = []
-    if (isClient) {
-      localStorage.removeItem(CART_STORAGE_KEY)
-    }
+    localStorage.removeItem(CART_STORAGE_KEY)
   }
 
   function toggleCart() {
