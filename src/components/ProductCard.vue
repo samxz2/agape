@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useCartStore } from '../stores/cartStore'
-eimport { pinia } from '../plugins/pinia'
+import { pinia } from '../plugins/pinia'
 import { ShoppingCart, Heart } from 'lucide-vue-next'
 import type { Producto } from '../data/productos'
 import { FALLBACK_IMAGE } from '../data/constants'
