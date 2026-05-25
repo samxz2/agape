@@ -2,25 +2,36 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { productos, type Producto } from '../data/productos'
 import ProductCard from './ProductCard.vue'
-import { Search, Grid3X3, List, ArrowUpDown, ArrowUp, ArrowDown, Percent } from 'lucide-vue-next'
+import { Search, Grid3X3, List, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-vue-next'
 
 const categoriaActiva = ref('todos')
 const busqueda = ref('')
 const busquedaDebounced = ref('')
+const searchOpen = ref(false)
 const viewMode = ref<'grid' | 'list'>('grid')
 const soloOfertas = ref(false)
 type SortMode = 'default' | 'precio-asc' | 'precio-desc'
 const ordenPor = ref<SortMode>('default')
 
-const categorias = [
-  { label: 'Todos', value: 'todos' },
-  { label: 'Caballero', value: 'caballero' },
-  { label: 'Damas', value: 'dama' },
-  { label: 'Unisex', value: 'unisex' },
-  { label: 'Sets', value: 'sets' },
-]
+const countsPorCategoria = computed(() => {
+  const counts: Record<string, number> = {}
+  for (const p of productos) {
+    counts[p.categoria] = (counts[p.categoria] || 0) + 1
+  }
+  return counts
+})
 
-const ofertasCount = computed(() => productos.filter(p => p.enOferta).length)
+const categoriaCards = computed(() => [
+  { id: 'caballero', label: 'Caballero', desc: 'Fragancias masculinas', count: countsPorCategoria.value.caballero || 0 },
+  { id: 'dama', label: 'Damas', desc: 'Fragancias femeninas', count: countsPorCategoria.value.dama || 0 },
+  { id: 'unisex', label: 'Unisex', desc: 'Para todos', count: countsPorCategoria.value.unisex || 0 },
+  { id: 'sets', label: 'Sets', desc: 'Combos especiales', count: countsPorCategoria.value.sets || 0 },
+])
+
+function seleccionarCategoria(cat: string) {
+  categoriaActiva.value = cat
+  window.scrollTo({ top: document.getElementById('productos')?.offsetTop, behavior: 'smooth' })
+}
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
@@ -81,21 +92,22 @@ function toggleSort() {
 
 <template>
   <div>
-    <!-- Filters Bar -->
-    <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
-      <!-- Search -->
-      <div class="relative w-full sm:w-72">
-        <Search :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-brown-400" />
-        <input
-          v-model="busqueda"
-          type="text"
-          placeholder="Buscar por nombre..."
-          class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-brown-200 bg-white text-brown-800 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 placeholder-brown-300 transition-all"
-        />
-      </div>
+    <!-- Controls Bar -->
+    <div class="flex flex-col sm:flex-row gap-3 items-end sm:items-center justify-between mb-6">
+      <!-- Sort + Search + View Toggle -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Search toggle button -->
+        <button
+          @click="searchOpen = !searchOpen"
+          class="p-2 rounded-lg transition-all text-sm border"
+          :class="searchOpen || busqueda
+            ? 'bg-brown-700 text-cream-50 border-brown-700'
+            : 'bg-white text-brown-500 border-brown-200 hover:bg-brown-100'"
+          :title="searchOpen ? 'Cerrar búsqueda' : 'Abrir búsqueda'"
+        >
+          <Search :size="18" />
+        </button>
 
-      <!-- Sort + View Toggle -->
-      <div class="flex items-center gap-2">
         <!-- Sort button -->
         <button
           @click="toggleSort"
@@ -130,33 +142,70 @@ function toggleSort() {
       </div>
     </div>
 
-    <!-- Categorías + Ofertas -->
-    <div class="overflow-x-auto pb-2 mb-6 -mx-4 px-4">
-      <div class="flex gap-2 min-w-max">
-        <button
-          v-for="cat in categorias"
-          :key="cat.value"
-          @click="categoriaActiva = cat.value"
-          class="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 whitespace-nowrap border"
-          :class="categoriaActiva === cat.value
-            ? 'bg-brown-700 text-cream-50 border-brown-700 shadow-md'
-            : 'bg-white text-brown-600 border-brown-200 hover:border-gold/50 hover:text-brown-700'"
-        >
-          {{ cat.label }}
-        </button>
+    <!-- Search bar (togglable) -->
+    <div
+      v-if="searchOpen"
+      class="relative w-full mb-6"
+    >
+      <Search :size="18" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-brown-400" />
+      <input
+        v-model="busqueda"
+        type="text"
+        placeholder="Buscar por nombre..."
+        class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-brown-200 bg-white text-brown-800 text-sm outline-none focus:ring-2 focus:ring-gold-300/30 focus:border-gold-300/50 placeholder-brown-300 transition-all"
+      />
+    </div>
 
-        <!-- Ofertas toggle -->
+    <!-- Category Cards -->
+    <div v-if="categoriaActiva === 'todos' && !busquedaDebounced && !soloOfertas" class="mb-8">
+      <div class="text-center mb-6">
+        <h2 class="font-playfair text-2xl md:text-3xl text-brown-800 font-bold">
+          Categorías
+        </h2>
+        <p class="text-brown-400 text-sm mt-1">
+          Explora nuestra selección exclusiva
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
         <button
-          v-if="ofertasCount > 0"
-          @click="soloOfertas = !soloOfertas"
-          class="flex items-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 whitespace-nowrap border"
-          :class="soloOfertas
-            ? 'bg-red-500 text-white border-red-500 shadow-md'
-            : 'bg-white text-red-500 border-red-200 hover:border-red-400'"
+          v-for="cat in categoriaCards"
+          :key="cat.id"
+          @click="seleccionarCategoria(cat.id)"
+          class="group relative bg-white rounded-[28px] border border-cream-200 hover:border-gold-300 p-5 md:p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center overflow-hidden cursor-pointer"
         >
-          <Percent :size="14" />
-          Ofertas
-          <span class="text-[10px] opacity-80">({{ ofertasCount }})</span>
+          <span class="absolute top-3 right-3 bg-cream-100 text-brown-500 text-[10px] font-bold px-2 py-0.5 rounded-full group-hover:bg-gold-300 group-hover:text-brown-900 transition-colors duration-300">
+            {{ cat.count }}
+          </span>
+
+          <div class="w-12 h-12 md:w-14 md:h-14 mx-auto mb-3 rounded-2xl bg-cream-100 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-brown-700 group-hover:to-brown-600 transition-all duration-500">
+            <svg v-if="cat.id === 'caballero'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brown-600 group-hover:text-cream-100 transition-colors duration-500">
+              <path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/>
+              <path d="M2 22c0-5 5-8 10-8s10 3 10 8"/>
+            </svg>
+            <svg v-if="cat.id === 'dama'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brown-600 group-hover:text-cream-100 transition-colors duration-500">
+              <circle cx="12" cy="8" r="3"/>
+              <path d="M6 21v-6a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v6"/>
+              <path d="M8 14s-2-2-4-2"/>
+              <path d="M16 14s2-2 4-2"/>
+              <path d="M9 5a3 3 0 0 1 6 0"/>
+            </svg>
+            <svg v-if="cat.id === 'unisex'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brown-600 group-hover:text-cream-100 transition-colors duration-500">
+              <path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/>
+              <path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z"/>
+              <path d="M5 16l.9 2.1L8 19l-2.1.9L5 22l-.9-2.1L2 19l2.1-.9L5 16z"/>
+            </svg>
+            <svg v-if="cat.id === 'sets'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brown-600 group-hover:text-cream-100 transition-colors duration-500">
+              <rect x="3" y="8" width="18" height="12" rx="2"/>
+              <path d="M3 8V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2"/>
+              <path d="M12 6v14"/>
+            </svg>
+          </div>
+
+          <h3 class="font-playfair text-lg md:text-xl text-brown-700 font-bold">
+            {{ cat.label }}
+          </h3>
+          <p class="text-[11px] md:text-xs text-brown-400 mt-1">{{ cat.desc }}</p>
         </button>
       </div>
     </div>

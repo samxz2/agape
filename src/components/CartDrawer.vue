@@ -180,7 +180,7 @@ watch(() => cart.isOpen, (open) => {
 <div class="flex items-center justify-between">
   <span class="text-brown-600 text-sm">Total</span>
   <span class="text-lg font-bold font-playfair text-brown-800">
-    {{ currencyStore.convertirPrecio(Number(cart.totalPriceUSD.toFixed(2))) }}
+    {{ currencyStore.convertirPrecio(cart.totalPriceUSD) }}
   </span>
 </div>
 

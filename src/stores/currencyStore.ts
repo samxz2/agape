@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { TASA_CAMBIO } from '../data/config'
+import { useCartStore } from './cartStore'
+import { pinia } from '../plugins/pinia'
 
 export const useCurrencyStore = defineStore('currency', () => {
   // Estado
@@ -17,6 +19,8 @@ export const useCurrencyStore = defineStore('currency', () => {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('preferred-currency', newCurrency)
     }
+    const cartStore = useCartStore(pinia)
+    cartStore.setCurrency(newCurrency)
   }
   
   function toggleCurrency() {
@@ -24,6 +28,8 @@ export const useCurrencyStore = defineStore('currency', () => {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('preferred-currency', currency.value)
     }
+    const cartStore = useCartStore(pinia)
+    cartStore.setCurrency(currency.value)
   }
   
   function loadCurrencyFromStorage() {

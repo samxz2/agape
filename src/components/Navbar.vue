@@ -71,30 +71,28 @@ function buscar() {
           </div>
         </a>
 
-        <!-- Search - Desktop -->
-        <div class="hidden md:flex flex-1 max-w-md mx-4">
-          <form @submit.prevent="buscar" class="w-full relative">
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Buscar perfume..."
-              class="w-full bg-brown-700/50 text-cream-100 placeholder-cream-300/40 rounded-full pl-4 pr-10 py-2 text-sm outline-none focus:ring-2 focus:ring-cream-300/50 transition-all border border-brown-600/50 focus:border-cream-300/50"
-            />
-            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-cream-300/60 hover:text-cream-200 transition-colors">
-              <Search :size="18" />
-            </button>
-          </form>
-        </div>
+        <!-- Categories - Desktop (replaces search) -->
+        <nav class="hidden md:flex items-center gap-1 flex-1 justify-center mx-4">
+          <a href="/" class="text-cream-200/80 hover:text-cream-100 text-xs px-3 py-1.5 rounded-lg hover:bg-brown-700/50 transition-all">
+            Inicio
+          </a>
+          <button v-for="cat in categorias" :key="cat.value" @click="irACategoria(cat.value)" class="text-cream-200/80 hover:text-cream-100 text-xs px-3 py-1.5 rounded-lg hover:bg-brown-700/50 transition-all flex items-center gap-1.5 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path :d="cat.svg"/>
+            </svg>
+            {{ cat.label }}
+          </button>
+        </nav>
 
-        <!-- Right side - SIEMPRE VISIBLE en móvil y desktop -->
+        <!-- Right side -->
         <div class="flex items-center gap-1">
-          <!-- Currency Toggle - SIEMPRE VISIBLE -->
-          <CurrencyToggle />
-
-          <!-- Search Mobile -->
-          <button @click="searchOpen = !searchOpen" class="md:hidden text-cream-200 hover:text-cream-100 transition-colors p-1.5 rounded-lg hover:bg-brown-700/50 cursor-pointer">
+          <!-- Search toggle - DESKTOP & MOBILE -->
+          <button @click="searchOpen = !searchOpen" class="text-cream-200 hover:text-cream-100 transition-colors p-1.5 rounded-lg hover:bg-brown-700/50 cursor-pointer">
             <Search :size="18" />
           </button>
+
+          <!-- Currency Toggle -->
+          <CurrencyToggle />
 
           <!-- Cart -->
           <button @click="cart.toggleCart()" class="relative text-cream-200 hover:text-cream-100 transition-colors p-1.5 rounded-lg hover:bg-brown-700/50 cursor-pointer">
@@ -111,41 +109,30 @@ function buscar() {
           </button>
         </div>
       </div>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-1 mt-2 border-t border-brown-700/30 pt-2">
-        <a href="/" class="text-cream-200/80 hover:text-cream-100 text-xs px-3 py-1.5 rounded-lg hover:bg-brown-700/50 transition-all">
-          Inicio
-        </a>
-        <button v-for="cat in categorias" :key="cat.value" @click="irACategoria(cat.value)" class="text-cream-200/80 hover:text-cream-100 text-xs px-3 py-1.5 rounded-lg hover:bg-brown-700/50 transition-all flex items-center gap-1.5 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path :d="cat.svg"/>
-          </svg>
-          {{ cat.label }}
-        </button>
-      </nav>
     </div>
 
-    <!-- Search Bar Mobile -->
+    <!-- Search Bar - toggleable (mobile & desktop) -->
     <div
       v-if="searchOpen"
-      class="md:hidden border-t border-brown-700/50 bg-brown-800/95 backdrop-blur-md px-4 py-3"
+      class="border-t border-brown-700/50 bg-brown-800/95 backdrop-blur-md px-4 py-3"
     >
-      <form @submit.prevent="buscar" class="flex gap-2">
-        <div class="relative flex-1">
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Buscar perfume..."
-            class="w-full bg-brown-700/50 text-cream-100 placeholder-cream-300/40 rounded-xl pl-4 pr-10 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cream-300/50 border border-brown-600/50"
-            autofocus
-          />
-          <Search :size="18" class="absolute right-3 top-1/2 -translate-y-1/2 text-cream-300/40" />
-        </div>
-        <button type="submit" class="bg-cream-300 text-brown-900 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-cream-200 transition-colors cursor-pointer">
-          Buscar
-        </button>
-      </form>
+      <div class="max-w-2xl mx-auto">
+        <form @submit.prevent="buscar" class="flex gap-2">
+          <div class="relative flex-1">
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Buscar perfume..."
+              class="w-full bg-brown-700/50 text-cream-100 placeholder-cream-300/40 rounded-xl pl-4 pr-10 py-2.5 text-sm outline-none focus:ring-2 focus:ring-cream-300/50 border border-brown-600/50"
+              autofocus
+            />
+            <Search :size="18" class="absolute right-3 top-1/2 -translate-y-1/2 text-cream-300/40" />
+          </div>
+          <button type="submit" class="bg-cream-300 text-brown-900 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-cream-200 transition-colors cursor-pointer">
+            Buscar
+          </button>
+        </form>
+      </div>
     </div>
 
     <!-- Mobile Menu Overlay -->
