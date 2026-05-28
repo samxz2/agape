@@ -25,7 +25,7 @@ const categoriaCards = computed(() => [
   { id: 'caballero', label: 'Caballero', desc: 'Fragancias masculinas', count: countsPorCategoria.value.caballero || 0 },
   { id: 'dama', label: 'Damas', desc: 'Fragancias femeninas', count: countsPorCategoria.value.dama || 0 },
   { id: 'unisex', label: 'Unisex', desc: 'Para todos', count: countsPorCategoria.value.unisex || 0 },
-  { id: 'sets', label: 'Sets', desc: 'Combos especiales', count: countsPorCategoria.value.sets || 0 },
+  { id: 'sets', label: 'Sets', desc: 'Sets', count: countsPorCategoria.value.sets || 0 },
 ])
 
 function seleccionarCategoria(cat: string) {
