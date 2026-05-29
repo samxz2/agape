@@ -91,7 +91,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
@@ -427,7 +427,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -479,7 +479,7 @@ export const productos: Producto[] = [
     id: 31,
     nombre: "LATTAFA QIMMAH 100ML EDP WOMEN",
     categoria: "dama",
-    precio: 37,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
