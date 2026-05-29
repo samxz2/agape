@@ -333,7 +333,7 @@ export const productos: Producto[] = [
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
-    imagen: "https://i.ibb.co/rGD3VZzz/a915df59f8c089f800bcadccf615113d.jpg"
+    imagen: "https://i.ibb.co/20Z57x53/d187c52c49893fefbf9db3fc0b9b9f7b.jpg"
   },
   {
     id: 21,
