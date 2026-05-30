@@ -1,0 +1,98 @@
+---
+import '../styles/global.css'
+import Navbar from '../components/Navbar.vue'
+import CartDrawer from '../components/CartDrawer.vue'
+import ToastBar from '../components/ToastBar.vue'
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
+
+interface Props {
+  title?: string
+  description?: string
+  canonical?: string
+  ogImage?: string
+}
+
+const SITE_URL = 'https://agapecollectionparfum.com'
+const DEFAULT_DESC = 'Agape Collection Parfum - Fragancias exclusivas de lujo. Perfumes originales para caballero, damas, unisex y sets. Envíos a Venezuela.'
+const DEFAULT_OG_IMAGE = 'https://i.ibb.co/CpHdX08t/1001879919.png'
+
+const { title = 'Agape Collection Parfum', description = DEFAULT_DESC, canonical = SITE_URL, ogImage = DEFAULT_OG_IMAGE } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Essentials -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#f3eadc" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Agape Collection Parfum" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts critical -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/CpHdX08t/1001879919.png" />
+  </head>
+  <body class="bg-cream-100 text-brown-700 min-h-screen antialiased">
+    <Navbar client:load />
+    <CartDrawer client:idle />
+    <ToastBar client:idle />
+    <Analytics />
+    <SpeedInsights />
+    <main>
+      <slot />
+    </main>
+    <footer class="border-t border-border bg-white/50 text-brown-400 py-8 mt-16 text-sm">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col items-center gap-3">
+          <p class="font-playfair text-lg text-brown-600 font-bold">Agape Collection Parfum</p>
+          <nav class="flex flex-wrap justify-center gap-x-6 gap-y-1">
+            <a href="/terminos" class="hover:text-gold-500 transition-colors">Términos y Condiciones</a>
+            <a href="/privacidad" class="hover:text-gold-500 transition-colors">Política de Privacidad</a>
+            <a href="/envios" class="hover:text-gold-500 transition-colors">Envíos y Devoluciones</a>
+          </nav>
+          <p class="opacity-60 text-xs tracking-wider">© 2026 · Todos los derechos reservados</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
