@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useCartStore } from '../stores/cartStore'
 import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
-import { ShoppingCart, Heart } from 'lucide-vue-next'
+import { ShoppingCart, Heart, Minus, Plus } from 'lucide-vue-next'
 import type { Producto } from '../data/productos'
 import { FALLBACK_IMAGE } from '../data/constants'
 import ProductModalMobile from './ProductModalMobile.vue'
@@ -17,6 +17,10 @@ const isLiked = ref(false)
 const isMobile = ref(false)
 const imagenCargada = ref(false)
 const imgRef = ref<HTMLImageElement | null>(null)
+const cantidad = ref(1)
+const animatingAdd = ref(false)
+
+const disponible = computed(() => props.producto.estadoEnvio === 'disponible')
 
 onMounted(() => {
   checkScreen()
@@ -41,11 +45,12 @@ function checkScreen() {
 
 function addToCart(e: Event) {
   e.stopPropagation()
-  cart.agregarAlCarrito(props.producto)
-  
-  const btn = e.currentTarget as HTMLElement
-  btn.classList.add('scale-95')
-  setTimeout(() => btn.classList.remove('scale-95'), 200)
+  if (!disponible.value) return
+  for (let i = 0; i < cantidad.value; i++) {
+    cart.agregarAlCarrito(props.producto)
+  }
+  animatingAdd.value = true
+  setTimeout(() => { animatingAdd.value = false }, 600)
 }
 
 function toggleLike(e: Event) {
@@ -64,20 +69,32 @@ function handleImageError(e: Event) {
   img.src = FALLBACK_IMAGE
   imagenCargada.value = true
 }
+
+function badgeColor() {
+  if (props.producto.estadoEnvio === 'disponible') return 'bg-green-500/90 text-white'
+  if (props.producto.estadoEnvio === 'proximamente') return 'bg-amber-400/90 text-brown-800'
+  return 'bg-brown-300/80 text-brown-800'
+}
+
+function badgeText() {
+  if (props.producto.estadoEnvio === 'disponible') return 'Disponible'
+  if (props.producto.estadoEnvio === 'proximamente') return 'Próximamente'
+  return 'Agotado'
+}
 </script>
 
 <template>
   <div
     @click="modalOpen = true"
-    class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border border-brown-100 hover:border-cream-300 flex flex-col"
+    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 cursor-pointer border border-cream-200/60 hover:border-gold-300/50 flex flex-col"
   >
     <!-- Imagen -->
-    <div class="relative overflow-hidden bg-gradient-to-b from-cream-100 to-cream-50 aspect-[3/4]">
+    <div class="relative overflow-hidden bg-gradient-to-b from-cream-100 to-cream-50 aspect-[4/5]">
       <img
         ref="imgRef"
         :src="producto.imagen"
         :alt="producto.nombre"
-        class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+        class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out-expo"
         :class="imagenCargada ? 'opacity-100' : 'opacity-0'"
         loading="lazy"
         @load="imagenCargada = true"
@@ -89,19 +106,19 @@ function handleImageError(e: Event) {
         class="absolute inset-0 bg-gradient-to-br from-cream-100 via-cream-50 to-cream-200 animate-shimmer"
       />
 
-      <div class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div class="img-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <!-- Badges -->
-      <div class="absolute top-3 left-3 flex flex-col gap-2">
+      <div class="absolute top-2 left-2 flex flex-col gap-1">
         <span
           v-if="producto.enOferta"
-          class="bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-lg"
+          class="bg-rose-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg"
         >
           Oferta
         </span>
         <span
           v-if="producto.oldPrice"
-          class="bg-cream-300 text-brown-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-lg"
+          class="bg-brown-600/80 text-cream-50 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg backdrop-blur-sm"
         >
           -{{ Math.round(((producto.oldPrice - getPrecioActual()) / producto.oldPrice) * 100) }}%
         </span>
@@ -110,87 +127,131 @@ function handleImageError(e: Event) {
       <!-- Like button -->
       <button
         @click="toggleLike"
-        class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0"
+        class="absolute top-2 right-2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 duration-300"
       >
         <Heart
-          :size="16"
-          :class="isLiked ? 'fill-red-500 text-red-500' : 'text-brown-600'"
+          :size="13"
+          :class="isLiked ? 'fill-rose-500 text-rose-500' : 'text-brown-500'"
         />
       </button>
 
       <!-- Estado envío -->
-      <div class="absolute bottom-3 left-3">
+      <div class="absolute bottom-2 left-2">
         <span
-          class="text-[10px] px-2.5 py-1 rounded-full font-semibold capitalize backdrop-blur-sm shadow-lg"
-          :class="producto.estadoEnvio === 'disponible'
-            ? 'bg-green-500 text-white'
-            : 'bg-red-500 text-white'"
+          class="text-[9px] px-2 py-0.5 rounded-full font-semibold capitalize shadow-lg"
+          :class="badgeColor()"
         >
-          {{ producto.estadoEnvio === 'disponible' ? 'Disponible' : 'Agotado' }}
+          {{ badgeText() }}
         </span>
       </div>
     </div>
 
     <!-- Info -->
-    <div class="p-2.5 md:p-3 flex flex-col flex-1 gap-1.5 md:gap-2">
+    <div class="p-2.5 flex flex-col flex-1 gap-1">
       <!-- Categoria -->
       <div class="flex items-center justify-between">
-        <span class="text-[10px] md:text-xs text-brown-400 uppercase tracking-widest font-semibold">
+        <span class="text-[9px] text-brown-400 uppercase tracking-widest font-semibold">
           {{ producto.categoria }}
         </span>
-        <!-- Indicador de moneda actual -->
-        <span class="text-[8px] md:text-[10px] text-brown-300 font-medium">
+        <span class="text-[7px] text-brown-300 font-medium">
           {{ currencyStore.currency === 'USD' ? '$ USD' : 'Bs.' }}
         </span>
       </div>
 
       <!-- Nombre -->
-      <h3 class="font-playfair text-xs md:text-sm text-brown-800 font-semibold leading-snug line-clamp-2 flex-1">
+      <h3 class="font-playfair text-[11px] text-brown-700 font-semibold leading-snug line-clamp-2 flex-1">
         {{ producto.nombre }}
       </h3>
 
-      <!-- Precio con cambio de moneda -->
+      <!-- Precio -->
       <div class="flex items-baseline gap-2">
-        <!-- Precio actual -->
         <span
-          class="text-lg md:text-xl font-bold"
-          :class="producto.enOferta ? 'text-red-600' : 'text-brown-700'"
+          class="text-sm font-bold"
+          :class="producto.enOferta ? 'text-rose-600' : 'text-brown-600'"
         >
           {{ currencyStore.convertirPrecio(getPrecioActual()) }}
         </span>
-        <!-- Precio antiguo (si existe) -->
         <span
           v-if="producto.oldPrice"
-          class="text-xs md:text-sm text-brown-300 line-through"
+          class="text-[10px] text-brown-300 line-through"
         >
           {{ currencyStore.convertirPrecio(producto.oldPrice) }}
         </span>
       </div>
 
+      <!-- Cantidad selector -->
+      <div v-if="disponible" class="flex items-center justify-between bg-cream-100 rounded-lg p-0.5">
+        <button
+          @click.stop="cantidad = Math.max(1, cantidad - 1)"
+          class="w-5 h-5 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
+        >
+          <Minus :size="9" class="text-brown-500" />
+        </button>
+        <span class="text-[10px] font-bold text-brown-700 w-4 text-center">{{ cantidad }}</span>
+        <button
+          @click.stop="cantidad = cantidad + 1"
+          class="w-5 h-5 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
+        >
+          <Plus :size="9" class="text-brown-500" />
+        </button>
+      </div>
+
       <!-- Botón Añadir al carrito -->
       <button
         @click="addToCart"
-        class="mt-1 md:mt-2 w-full flex items-center justify-center gap-2 bg-brown-700 hover:bg-brown-600 text-cream-50 text-xs md:text-sm font-semibold py-2.5 md:py-3 rounded-xl transition-all duration-200 active:scale-95 shadow-md hover:shadow-lg"
+        :disabled="!disponible"
+        class="w-full flex items-center justify-center gap-1.5 text-[10px] font-semibold py-1.5 rounded-lg transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md"
+        :class="disponible
+          ? 'bg-brown-600 hover:bg-brown-500 text-cream-50'
+          : 'bg-brown-200 text-brown-400 cursor-not-allowed'"
       >
-        <ShoppingCart :size="16" />
-        <span>Añadir al carrito</span>
+        <ShoppingCart :size="12" :class="animatingAdd ? 'animate-bounce-once' : ''" />
+        <span>{{ disponible ? 'Añadir' : 'No disponible' }}</span>
       </button>
     </div>
   </div>
 
-  <!-- Modal MÓVIL (solo se muestra en pantallas menores a 768px) -->
-  <ProductModalMobile
-    v-if="modalOpen && isMobile"
-    :producto="producto"
-    @close="modalOpen = false"
-    @add-to-cart="cart.agregarAlCarrito(producto)"
-  />
+  <!-- Modal MÓVIL -->
+  <Transition name="modal">
+    <ProductModalMobile
+      v-if="modalOpen && isMobile"
+      :producto="producto"
+      @close="modalOpen = false"
+      @add-to-cart="disponible ? cart.agregarAlCarrito(producto) : null"
+    />
+  </Transition>
 
-  <!-- Modal DESKTOP (solo se muestra en pantallas mayores o iguales a 768px) -->
-  <ProductModalDesktop
-    v-if="modalOpen && !isMobile"
-    :producto="producto"
-    @close="modalOpen = false"
-    @add-to-cart="cart.agregarAlCarrito(producto)"
-  />
+  <!-- Modal DESKTOP -->
+  <Transition name="modal">
+    <ProductModalDesktop
+      v-if="modalOpen && !isMobile"
+      :producto="producto"
+      @close="modalOpen = false"
+      @add-to-cart="disponible ? cart.agregarAlCarrito(producto) : null"
+    />
+  </Transition>
 </template>
+
+<style scoped>
+.modal-enter-active {
+  transition: all 0.3s ease-out;
+}
+.modal-leave-active {
+  transition: all 0.2s ease-in;
+}
+.modal-enter-from {
+  opacity: 0;
+}
+.modal-leave-to {
+  opacity: 0;
+}
+
+@keyframes bounce-once {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-4px); }
+  60% { transform: translateY(-2px); }
+}
+.animate-bounce-once {
+  animation: bounce-once 0.4s ease;
+}
+</style>

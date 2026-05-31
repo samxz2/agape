@@ -20,7 +20,10 @@ const relacionados = computed(() =>
 
 function abrirRelacionado(id: number) {
   emit('close')
-  window.location.href = `/?producto=${id}`
+  const url = new URL(window.location.href)
+  url.searchParams.set('producto', String(id))
+  window.history.pushState({}, '', url.toString())
+  window.dispatchEvent(new CustomEvent('producto-change', { detail: id }))
 }
 
 function sanitizeCantidad() {
@@ -68,7 +71,7 @@ function handleKeydown(e: KeyboardEvent) {
 
 <template>
   <div
-    class="fixed inset-0 z-50 bg-black/50 flex items-end justify-center overflow-hidden md:hidden"
+    class="fixed inset-0 z-50 bg-brown-900/20 flex items-end justify-center overflow-hidden md:hidden"
     @click="onBackdrop"
   >
     <div
@@ -77,7 +80,7 @@ function handleKeydown(e: KeyboardEvent) {
     >
       <!-- Swipe Indicator -->
       <div class="flex justify-center pt-3 pb-1">
-        <div class="w-10 h-1 bg-brown-300 rounded-full"></div>
+        <div class="w-10 h-1 bg-cream-300 rounded-full"></div>
       </div>
 
       <!-- Header -->
@@ -91,80 +94,83 @@ function handleKeydown(e: KeyboardEvent) {
           </span>
           <button
             @click="emit('close')"
-            class="bg-brown-100 hover:bg-brown-200 rounded-full p-1.5 transition-colors"
+            class="bg-cream-100 hover:bg-cream-200 rounded-full p-1.5 transition-colors"
           >
-            <X :size="16" class="text-brown-600" />
+            <X :size="16" class="text-brown-500" />
           </button>
         </div>
       </div>
 
-      <div class="flex-1 overflow-y-auto px-4 pb-4 space-y-3">
+      <div class="flex-1 overflow-y-auto px-4 pb-4 space-y-3 scrollbar-thin">
         <!-- Imagen -->
         <div class="relative bg-gradient-to-b from-cream-100 to-cream-50 rounded-xl overflow-hidden h-52 -mx-4 -mt-2 px-4 pt-2">
           <img
             :src="producto.imagen"
             :alt="producto.nombre"
-            class="w-full h-full object-contain p-3"
+            class="w-full h-full object-contain p-4"
             @error="handleImageError"
           />
           <div class="absolute top-2 left-2 flex flex-col gap-1">
-            <span v-if="producto.enOferta" class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-lg">
+            <span v-if="producto.enOferta" class="bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">
               EN OFERTA
+            </span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold capitalize shadow-md" :class="producto.estadoEnvio === 'disponible' ? 'bg-green-500/90 text-white' : producto.estadoEnvio === 'proximamente' ? 'bg-amber-400/90 text-brown-800' : 'bg-brown-300/80 text-brown-800'">
+              {{ producto.estadoEnvio === 'disponible' ? 'Disponible' : producto.estadoEnvio === 'proximamente' ? 'Próximamente' : 'Agotado' }}
             </span>
           </div>
         </div>
 
-        <h2 class="font-playfair text-sm text-brown-800 font-bold leading-snug">{{ producto.nombre }}</h2>
+        <h2 class="font-playfair text-sm text-brown-700 font-bold leading-snug">{{ producto.nombre }}</h2>
 
         <div class="flex items-baseline gap-2">
-          <span class="text-lg font-bold" :class="producto.enOferta ? 'text-red-600' : 'text-brown-700'">
+          <span class="text-lg font-bold" :class="producto.enOferta ? 'text-rose-600' : 'text-brown-600'">
             {{ currencyStore.convertirPrecio(getPrecioActual()) }}
           </span>
           <span v-if="producto.oldPrice" class="text-xs text-brown-300 line-through">
             {{ currencyStore.convertirPrecio(producto.oldPrice) }}
           </span>
-          <span v-if="producto.enOferta && producto.oldPrice" class="bg-red-100 text-red-600 text-[9px] font-bold px-1 py-0.5 rounded">
+          <span v-if="producto.enOferta && producto.oldPrice" class="bg-rose-100 text-rose-600 text-[9px] font-bold px-1 py-0.5 rounded">
             -{{ Math.round(((producto.oldPrice - getPrecioActual()) / producto.oldPrice) * 100) }}%
           </span>
         </div>
 
-        <div class="bg-cream-100 rounded-xl p-2.5 border border-cream-200">
+        <div class="bg-cream-100 rounded-xl p-2.5 border border-cream-200/60">
           <p class="text-brown-600 text-[11px] leading-relaxed whitespace-pre-line">{{ producto.descripcion }}</p>
         </div>
 
         <div class="grid grid-cols-2 gap-1.5">
-          <div class="bg-white rounded-lg p-2 border border-brown-100">
+          <div class="bg-white rounded-lg p-2 border border-cream-200/60">
             <p class="text-[9px] text-brown-400 uppercase tracking-wider">Intensidad</p>
             <p class="font-semibold text-brown-700 text-[11px] mt-0.5">{{ producto.intensidad }}</p>
           </div>
-          <div class="bg-white rounded-lg p-2 border border-brown-100">
+          <div class="bg-white rounded-lg p-2 border border-cream-200/60">
             <p class="text-[9px] text-brown-400 uppercase tracking-wider">Estado</p>
-            <p class="font-semibold text-[11px] mt-0.5 capitalize" :class="producto.estadoEnvio === 'disponible' ? 'text-green-600' : 'text-red-600'">{{ producto.estadoEnvio }}</p>
+            <p class="font-semibold text-[11px] mt-0.5 capitalize" :class="producto.estadoEnvio === 'disponible' ? 'text-green-600' : producto.estadoEnvio === 'proximamente' ? 'text-amber-600' : 'text-brown-500'">{{ producto.estadoEnvio === 'disponible' ? 'Disponible' : producto.estadoEnvio === 'proximamente' ? 'Próximamente' : 'Agotado' }}</p>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-brown-600">
+        <div class="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-brown-500">
           <div class="flex items-center gap-1">
             <Shield :size="11" class="text-green-500 shrink-0" />
             <span>Original</span>
           </div>
           <div class="flex items-center gap-1">
-            <Truck :size="11" class="text-brown-500 shrink-0" />
+            <Truck :size="11" class="text-brown-400 shrink-0" />
             <span>Envío</span>
           </div>
           <div class="flex items-center gap-1">
-            <Package :size="11" class="text-brown-500 shrink-0" />
+            <Package :size="11" class="text-brown-400 shrink-0" />
             <span>Seguro</span>
           </div>
         </div>
 
         <!-- Cantidad -->
         <div class="flex items-center justify-between">
-          <span class="text-[11px] text-brown-600 font-medium">Cantidad:</span>
-          <div class="flex items-center gap-1.5 bg-white rounded-lg border border-brown-200 p-0.5">
+          <span class="text-[11px] text-brown-500 font-medium">Cantidad:</span>
+          <div class="flex items-center gap-1.5 bg-white rounded-lg border border-cream-200/60 p-0.5">
             <button 
               @click="cantidad = Math.max(1, cantidad - 1)" 
-              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-700 font-bold transition-colors"
+              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Minus :size="10" />
             </button>
@@ -173,20 +179,20 @@ function handleKeydown(e: KeyboardEvent) {
               type="number" 
               min="1"
               @blur="sanitizeCantidad"
-              class="w-10 text-center font-bold text-brown-800 text-xs bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              class="w-10 text-center font-bold text-brown-700 text-xs bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
             <button 
               @click="cantidad = cantidad + 1" 
-              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-700 font-bold transition-colors"
+              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Plus :size="10" />
             </button>
           </div>
         </div>
 
-        <button @click="addWithQuantity" class="w-full flex items-center justify-center gap-2 bg-brown-700 hover:bg-brown-600 text-cream-50 font-bold py-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-lg text-xs">
+        <button @click="addWithQuantity" :disabled="producto.estadoEnvio !== 'disponible'" class="w-full flex items-center justify-center gap-2 font-bold py-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-lg text-xs" :class="producto.estadoEnvio === 'disponible' ? 'bg-brown-600 hover:bg-brown-500 text-cream-50' : 'bg-brown-200 text-brown-400 cursor-not-allowed'">
           <ShoppingCart :size="15" />
-          Añadir — {{ currencyStore.convertirPrecio(getPrecioActual() * cantidad) }}
+          {{ producto.estadoEnvio === 'disponible' ? `Añadir — ${currencyStore.convertirPrecio(getPrecioActual() * cantidad)}` : 'No disponible' }}
         </button>
 
         <!-- Productos relacionados -->
@@ -197,7 +203,7 @@ function handleKeydown(e: KeyboardEvent) {
               v-for="rel in relacionados"
               :key="rel.id"
               @click="abrirRelacionado(rel.id)"
-              class="group shrink-0 w-24 bg-white rounded-xl overflow-hidden border border-cream-200 hover:border-gold-300 transition-all text-left cursor-pointer"
+              class="group shrink-0 w-24 bg-white rounded-xl overflow-hidden border border-cream-200 hover:border-gold-300/50 transition-all text-left cursor-pointer"
             >
               <div class="aspect-square bg-cream-50 overflow-hidden">
                 <img
@@ -209,7 +215,7 @@ function handleKeydown(e: KeyboardEvent) {
                 />
               </div>
               <div class="p-1.5">
-                <p class="text-[9px] text-brown-800 font-semibold leading-tight line-clamp-1">{{ rel.nombre }}</p>
+                <p class="text-[9px] text-brown-700 font-semibold leading-tight line-clamp-1">{{ rel.nombre }}</p>
                 <p class="text-[9px] text-brown-500 font-bold">{{ currencyStore.convertirPrecio(rel.precio) }}</p>
               </div>
             </button>

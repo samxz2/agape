@@ -38,6 +38,7 @@ export const useCartStore = defineStore('cart', () => {
   const currentCurrency = ref<'USD' | 'BS'>('USD')
   const tasaCambio = ref(TASA_CAMBIO)
   const toastMessage = ref('')
+  const showVaciarConfirm = ref(false)
   let toastTimer: ReturnType<typeof setTimeout>
 
   const totalItems = computed(() =>
@@ -105,11 +106,21 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  function vaciarCarrito() {
+  function solicitarVaciar() {
+    showVaciarConfirm.value = true
+  }
+
+  function confirmarVaciar() {
     items.value = []
+    showVaciarConfirm.value = false
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem(CART_STORAGE_KEY)
     }
+    showToast('Carrito vaciado')
+  }
+
+  function cancelarVaciar() {
+    showVaciarConfirm.value = false
   }
 
   function toggleCart() {
@@ -158,12 +169,15 @@ export const useCartStore = defineStore('cart', () => {
     currentCurrency,
     tasaCambio,
     toastMessage,
+    showVaciarConfirm,
     getPrecioFormateado,
     setCurrency,
     agregarAlCarrito,
     eliminarDelCarrito,
     cambiarCantidad,
-    vaciarCarrito,
+    solicitarVaciar,
+    confirmarVaciar,
+    cancelarVaciar,
     toggleCart,
     generarMensajeWhatsapp
   }

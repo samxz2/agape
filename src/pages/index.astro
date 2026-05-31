@@ -9,80 +9,98 @@ const totalProductos = productos.length
 <Layout title="Agape Collection Parfum">
   <!-- HERO -->
   <section
-    class="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,#5c3a25,transparent_60%),linear-gradient(to_bottom,#351f14,#22120b)]"
+    class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-cream-100 via-cream-50 to-cream-100"
   >
-    <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
-      <p class="text-cream-300 uppercase tracking-[0.4em] text-xs md:text-sm mb-4 animate-fade-in-up" style="animation-delay: 0s">
-        Bienvenido a
-      </p>
+    <!-- Animated gradient orbs -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gold-300/20 rounded-full blur-[120px] animate-float"></div>
+      <div class="absolute -bottom-32 -right-32 w-[400px] h-[400px] bg-rose-300/20 rounded-full blur-[100px] animate-float-delayed"></div>
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cream-300/30 rounded-full blur-[150px]"></div>
+    </div>
 
-      <h1 class="font-playfair text-5xl md:text-7xl text-cream-50 font-bold leading-tight animate-fade-in-up" style="animation-delay: 0.1s">
+    <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+      <div class="animate-fade-in-up" style="animation-delay: 0s">
+        <span class="inline-block text-brown-400/80 uppercase tracking-[0.35em] text-xs md:text-sm mb-5 font-medium">
+          Bienvenido a
+        </span>
+      </div>
+
+      <h1 class="font-playfair text-5xl md:text-8xl text-brown-700 font-bold leading-[1.05] tracking-tight animate-fade-in-up" style="animation-delay: 0.12s">
         Agape
-        <span class="block text-gold-300">
+        <span class="block text-gradient">
           Collection
         </span>
       </h1>
 
-      <p class="font-playfair italic text-xl md:text-3xl text-cream-200 mt-3 animate-fade-in-up" style="animation-delay: 0.2s">
+      <p class="font-playfair italic text-xl md:text-3xl text-brown-400/70 mt-2 animate-fade-in-up" style="animation-delay: 0.22s">
         Parfum
       </p>
 
-      <p class="max-w-2xl mx-auto mt-4 text-sm md:text-base text-cream-200/80 leading-relaxed animate-fade-in-up" style="animation-delay: 0.3s">
-        Descubre nuestra exclusiva colección de perfumes para caballero,
-        damas, unisex y sets.
-        TODA COMPRA AL MAYOR TIENE DESCUENTO PARA PAGOS EN DIVISA.
+      <p class="max-w-2xl mx-auto mt-5 text-sm md:text-base text-brown-400/70 leading-relaxed animate-fade-in-up font-light" style="animation-delay: 0.32s">
+        Descubre nuestra exclusiva colección de perfumes de nicho.
+        Fragancias que definen momentos.
       </p>
 
       <!-- Stats -->
-      <div class="flex items-center justify-center gap-6 md:gap-10 mt-6 animate-fade-in-up" style="animation-delay: 0.35s">
+      <div class="flex items-center justify-center gap-8 md:gap-14 mt-8 animate-fade-in-up" style="animation-delay: 0.38s">
         <div class="text-center">
-          <p class="text-gold-300 text-xl md:text-2xl font-bold font-playfair">{totalProductos}+</p>
-          <p class="text-cream-300/60 text-[10px] md:text-xs uppercase tracking-wider">Productos</p>
+          <p class="text-brown-600 text-2xl md:text-3xl font-bold font-playfair">{totalProductos}</p>
+          <p class="text-brown-400/60 text-[10px] md:text-xs uppercase tracking-[0.2em] mt-1">Productos</p>
         </div>
-        <div class="w-px h-8 bg-cream-300/20"></div>
+        <div class="w-px h-10 bg-brown-200/60"></div>
         <div class="text-center">
-          <p class="text-gold-300 text-xl md:text-2xl font-bold font-playfair">4</p>
-          <p class="text-cream-300/60 text-[10px] md:text-xs uppercase tracking-wider">Categorías</p>
+          <p class="text-brown-600 text-2xl md:text-3xl font-bold font-playfair">4</p>
+          <p class="text-brown-400/60 text-[10px] md:text-xs uppercase tracking-[0.2em] mt-1">Categorías</p>
         </div>
-        <div class="w-px h-8 bg-cream-300/20"></div>
+        <div class="w-px h-10 bg-brown-200/60"></div>
         <div class="text-center">
-          <p class="text-gold-300 text-xl md:text-2xl font-bold font-playfair">🇻🇪</p>
-          <p class="text-cream-300/60 text-[10px] md:text-xs uppercase tracking-wider">Envío Venezuela</p>
+          <p class="text-2xl md:text-3xl font-playfair">🇻🇪</p>
+          <p class="text-brown-400/60 text-[10px] md:text-xs uppercase tracking-[0.2em] mt-1">Envío Venezuela</p>
         </div>
       </div>
 
       <!-- BOTONES -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 animate-fade-in-up" style="animation-delay: 0.45s">
         <a
           href="#productos"
-          class="bg-gradient-to-r from-brown-700 to-brown-600 hover:from-brown-600 hover:to-brown-500 text-cream-50 font-semibold rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 px-8 py-4 text-sm uppercase tracking-widest"
+          class="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brown-600 to-brown-500 text-cream-50 font-bold rounded-full transition-all duration-300 hover:shadow-[0_8px_30px_rgba(122,88,55,0.25)] hover:-translate-y-0.5 active:scale-[0.98] px-8 py-4 text-sm uppercase tracking-[0.15em]"
         >
           Explorar Colección
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
         </a>
 
         <a
           href="#productos"
-          class="border border-cream-300/40 hover:border-gold-300 text-cream-100 hover:text-gold-300 rounded-2xl transition-all duration-300 px-8 py-4 text-sm uppercase tracking-widest"
+          class="glass-dark text-brown-600 hover:text-brown-700 rounded-full transition-all duration-300 hover:bg-brown-100/30 px-8 py-4 text-sm uppercase tracking-[0.15em] font-medium active:scale-[0.98]"
         >
           Ver Categorías
         </a>
       </div>
     </div>
 
-    <!-- blur decor -->
-    <div class="absolute top-0 left-0 w-72 h-72 bg-gold-300/10 blur-3xl rounded-full"></div>
-    <div class="absolute bottom-0 right-0 w-72 h-72 bg-brown-300/10 blur-3xl rounded-full"></div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-pulse-subtle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brown-300/50">
+        <line x1="12" y1="2" x2="12" y2="22"/>
+        <polyline points="19 15 12 22 5 15"/>
+      </svg>
+    </div>
   </section>
 
   <!-- PRODUCTOS -->
-  <section id="productos" class="py-14 md:py-18 bg-gradient-to-b from-cream-50 to-cream-100">
+  <section id="productos" class="py-16 md:py-24 bg-cream-50">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-8">
-        <h2 class="font-playfair text-3xl md:text-4xl text-brown-800 font-bold">
+      <div class="text-center mb-12">
+        <span class="inline-block text-brown-400 text-xs uppercase tracking-[0.3em] font-semibold mb-3">Colección Exclusiva</span>
+        <h2 class="font-playfair text-4xl md:text-5xl text-brown-700 font-bold leading-tight">
           Nuestra Colección
         </h2>
-        <p class="text-brown-400 text-sm mt-2">
-          Encuentra tu fragancia ideal · <span class="font-semibold text-brown-500">{totalProductos}</span> productos disponibles
+        <div class="w-16 h-0.5 bg-gold-400/50 mx-auto mt-4 rounded-full"></div>
+        <p class="text-brown-400 text-sm mt-4 max-w-lg mx-auto">
+          Encuentra tu fragancia ideal · <span class="font-semibold text-brown-600">{totalProductos}</span> productos disponibles
         </p>
       </div>
 
@@ -95,7 +113,7 @@ const totalProductos = productos.length
     href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMERO || '584127050149'}`}
     target="_blank"
     rel="noopener noreferrer"
-    class="fixed bottom-6 right-6 z-40 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-[0_8px_30px_rgba(34,197,94,0.35)] hover:shadow-[0_12px_40px_rgba(34,197,94,0.5)] hover:scale-110 active:scale-95 transition-all duration-300 animate-pulse-subtle"
+    class="fixed bottom-6 right-6 z-40 bg-gradient-to-br from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-[0_8px_30px_rgba(34,197,94,0.35)] hover:shadow-[0_12px_40px_rgba(34,197,94,0.5)] hover:scale-110 active:scale-95 transition-all duration-300"
     aria-label="Contactar por WhatsApp"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -106,7 +124,7 @@ const totalProductos = productos.length
   <!-- Back to top -->
   <button
     id="back-to-top"
-    class="fixed bottom-24 right-6 z-40 bg-brown-700 hover:bg-brown-600 text-cream-50 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"
+    class="fixed bottom-24 right-6 z-40 bg-brown-600 hover:bg-brown-500 text-cream-50 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
     aria-label="Volver arriba"
   >

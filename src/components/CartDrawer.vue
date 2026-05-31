@@ -35,44 +35,43 @@ watch(() => cart.isOpen, (open) => {
   <Transition name="backdrop">
     <div
       v-if="cart.isOpen"
-      class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+      class="fixed inset-0 z-40 bg-brown-900/20 backdrop-blur-sm"
       @click="cart.toggleCart()"
     />
   </Transition>
 
   <!-- Drawer -->
   <div
-    class="fixed top-0 right-0 h-full w-full max-w-sm z-50 bg-gradient-to-b from-cream-50 to-white shadow-2xl flex flex-col transition-all duration-[400ms] ease-out-expo"
+    class="fixed top-0 right-0 h-full w-full max-w-sm z-50 bg-cream-50 shadow-2xl flex flex-col transition-all duration-[400ms] ease-out-expo"
     :class="cart.isOpen ? 'translate-x-0' : 'translate-x-full'"
   >
     <!-- Header -->
-    <div class="bg-gradient-to-r from-brown-800 to-brown-700 px-5 py-4">
+    <div class="bg-cream-100 border-b border-cream-200 px-5 py-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="relative">
-            <ShoppingBag :size="24" class="text-cream-300" />
+            <ShoppingBag :size="24" class="text-brown-500" />
             <span
               v-if="cart.totalItems > 0"
-              class="absolute -top-2 -right-2 bg-cream-300 text-brown-900 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1"
+              class="absolute -top-2 -right-2 bg-brown-600 text-cream-50 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-md"
             >
               {{ cart.totalItems }}
             </span>
           </div>
           <div>
-            <h2 class="font-playfair text-lg text-cream-100 font-bold">Tu Carrito</h2>
-            <p class="text-cream-300/60 text-xs">
+            <h2 class="font-playfair text-lg text-brown-700 font-bold">Tu Carrito</h2>
+            <p class="text-brown-400/60 text-xs">
               {{ currencyStore.currency === 'USD' ? 'Precios en USD' : 'Precios en Bs.' }}
             </p>
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <!-- Indicador de moneda -->
-          <span class="text-[10px] text-cream-300 font-medium bg-brown-600/50 px-2 py-0.5 rounded-full">
+          <span class="text-[10px] text-brown-500 font-medium bg-cream-200/70 px-2 py-0.5 rounded-full">
             {{ currencyStore.currency === 'USD' ? '$' : 'Bs.' }}
           </span>
           <button
             @click="cart.toggleCart()"
-            class="text-cream-300 hover:text-cream-100 p-2 rounded-lg hover:bg-brown-600/50 transition-all"
+            class="text-brown-400 hover:text-brown-600 p-2 rounded-lg hover:bg-cream-200/50 transition-all"
           >
             <X :size="20" />
           </button>
@@ -81,22 +80,22 @@ watch(() => cart.isOpen, (open) => {
     </div>
 
     <!-- Items -->
-    <div class="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+    <div class="flex-1 overflow-y-auto px-4 py-4 space-y-3 scrollbar-thin">
       <!-- Vacío -->
       <div
         v-if="cart.items.length === 0"
         class="flex flex-col items-center justify-center h-full gap-4 text-brown-400"
       >
-        <div class="w-24 h-24 bg-brown-100 rounded-full flex items-center justify-center">
+        <div class="w-24 h-24 bg-cream-100 rounded-full flex items-center justify-center">
           <ShoppingBag :size="40" class="text-brown-300" />
         </div>
         <div class="text-center">
-          <p class="font-playfair text-xl text-brown-600">Tu carrito está vacío</p>
+          <p class="font-playfair text-xl text-brown-500">Tu carrito está vacío</p>
           <p class="text-sm text-brown-400 mt-1">Agrega algunos perfumes para continuar</p>
         </div>
         <button
           @click="cart.toggleCart()"
-          class="bg-gradient-to-r from-brown-700 to-brown-600 text-cream-50 px-8 py-3 rounded-2xl text-sm font-bold hover:from-brown-600 hover:to-brown-500 transition-all shadow-lg"
+          class="bg-brown-600 hover:bg-brown-500 text-cream-50 px-8 py-3 rounded-2xl text-sm font-bold transition-all shadow-lg"
         >
           Ver productos
         </button>
@@ -106,7 +105,7 @@ watch(() => cart.isOpen, (open) => {
       <div
         v-for="item in cart.items"
         :key="item.id"
-        class="bg-white rounded-2xl p-3 shadow-sm border border-brown-100 flex gap-3 items-center"
+        class="bg-white rounded-2xl p-3 shadow-sm border border-cream-200/60 flex gap-3 items-center"
       >
         <img
           :src="item.imagen"
@@ -116,42 +115,40 @@ watch(() => cart.isOpen, (open) => {
         />
         <div class="flex flex-col flex-1 gap-1 min-w-0">
           <p class="text-[10px] md:text-xs text-brown-400 uppercase tracking-wider">{{ item.categoria }}</p>
-          <p class="text-xs md:text-sm font-semibold text-brown-800 leading-snug line-clamp-2">
+          <p class="text-xs md:text-sm font-semibold text-brown-700 leading-snug line-clamp-2">
             {{ item.nombre }}
           </p>
-          <!-- Precio con cambio de moneda -->
           <p class="text-brown-600 font-bold text-sm md:text-base">
             {{ currencyStore.convertirPrecio(getPrecioItem(item)) }}
           </p>
 
           <!-- Controles cantidad -->
           <div class="flex items-center gap-2 mt-1">
-            <div class="flex items-center gap-1 bg-brown-50 rounded-lg p-0.5">
+            <div class="flex items-center gap-1 bg-cream-100 rounded-lg p-0.5">
               <button
                 @click="cart.cambiarCantidad(item.id, item.cantidad - 1)"
-                class="w-6 h-6 rounded-md bg-white hover:bg-brown-100 flex items-center justify-center transition-colors shadow-sm"
+                class="w-6 h-6 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
               >
-                <Minus :size="10" class="text-brown-600" />
+                <Minus :size="10" class="text-brown-500" />
               </button>
-              <span class="text-xs font-bold text-brown-800 w-5 text-center">
+              <span class="text-xs font-bold text-brown-700 w-5 text-center">
                 {{ item.cantidad }}
               </span>
               <button
                 @click="cart.cambiarCantidad(item.id, item.cantidad + 1)"
-                class="w-6 h-6 rounded-md bg-white hover:bg-brown-100 flex items-center justify-center transition-colors shadow-sm"
+                class="w-6 h-6 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
               >
-                <Plus :size="10" class="text-brown-600" />
+                <Plus :size="10" class="text-brown-500" />
               </button>
             </div>
 
             <button
               @click="cart.eliminarDelCarrito(item.id)"
-              class="ml-auto text-red-400 hover:text-red-600 p-1 rounded-lg hover:bg-red-50 transition-all"
+              class="ml-auto text-rose-400 hover:text-rose-600 p-1 rounded-lg hover:bg-rose-50 transition-all"
             >
               <Trash2 :size="14" />
             </button>
           </div>
-          <!-- Subtotal del item en moneda actual -->
           <p class="text-[10px] text-brown-400 mt-0.5">
             Subtotal: {{ currencyStore.convertirPrecio(getPrecioItem(item) * item.cantidad) }}
           </p>
@@ -162,29 +159,26 @@ watch(() => cart.isOpen, (open) => {
     <!-- Footer -->
     <div
       v-if="cart.items.length > 0"
-      class="border-t border-brown-200 px-5 py-4 bg-white space-y-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]"
+      class="border-t border-cream-200 px-5 py-4 bg-cream-50 space-y-3 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]"
     >
-      <!-- Beneficios -->
       <div class="flex items-center gap-4 text-xs text-brown-500 justify-center">
         <span class="flex items-center gap-1">
           <Shield :size="12" class="text-green-500" />
           Originales
         </span>
         <span class="flex items-center gap-1">
-          <Truck :size="12" class="text-cream-400" />
+          <Truck :size="12" class="text-brown-400" />
           Envío
         </span>
       </div>
 
-      <!-- En la sección del total, reemplaza: -->
-<div class="flex items-center justify-between">
-  <span class="text-brown-600 text-sm">Total</span>
-  <span class="text-lg font-bold font-playfair text-brown-800">
-    {{ currencyStore.convertirPrecio(cart.totalPriceUSD) }}
-  </span>
-</div>
+      <div class="flex items-center justify-between">
+        <span class="text-brown-500 text-sm">Total</span>
+        <span class="text-lg font-bold font-playfair text-brown-700">
+          {{ currencyStore.convertirPrecio(cart.totalPriceUSD) }}
+        </span>
+      </div>
 
-      <!-- Botón WhatsApp -->
       <button
         @click="cart.generarMensajeWhatsapp()"
         class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold py-3.5 rounded-2xl transition-all duration-200 active:scale-[0.98] shadow-lg hover:shadow-xl text-sm"
@@ -193,14 +187,49 @@ watch(() => cart.isOpen, (open) => {
         Pedir por WhatsApp
       </button>
 
-      <!-- Vaciar -->
       <button
-        @click="cart.vaciarCarrito()"
-        class="w-full text-center text-xs text-brown-400 hover:text-red-500 transition-colors py-1"
+        @click="cart.solicitarVaciar()"
+        class="w-full text-center text-xs text-brown-400 hover:text-rose-500 transition-colors py-1"
       >
         Vaciar carrito
       </button>
     </div>
+
+    <!-- Confirmación vaciar carrito -->
+    <Transition name="confirm">
+      <div
+        v-if="cart.showVaciarConfirm"
+        class="absolute inset-0 z-10 bg-brown-900/20 backdrop-blur-sm flex items-center justify-center p-6"
+      >
+        <div class="bg-cream-50 rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center space-y-4" @click.stop>
+          <div class="w-14 h-14 bg-rose-100 rounded-full flex items-center justify-center mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-rose-500">
+              <path d="M3 6h18"/>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-playfair text-lg text-brown-700 font-bold">Vaciar carrito</h3>
+            <p class="text-sm text-brown-400 mt-1">¿Estás seguro? Esta acción no se puede deshacer.</p>
+          </div>
+          <div class="flex gap-3">
+            <button
+              @click="cart.cancelarVaciar()"
+              class="flex-1 py-2.5 rounded-xl border border-cream-200 text-brown-600 text-sm font-semibold hover:bg-cream-100 transition-all"
+            >
+              Cancelar
+            </button>
+            <button
+              @click="cart.confirmarVaciar()"
+              class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-sm font-semibold hover:bg-rose-600 transition-all"
+            >
+              Vaciar
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -212,5 +241,20 @@ watch(() => cart.isOpen, (open) => {
 .backdrop-enter-from,
 .backdrop-leave-to {
   opacity: 0;
+}
+
+.confirm-enter-active {
+  transition: all 0.25s ease-out;
+}
+.confirm-leave-active {
+  transition: all 0.2s ease-in;
+}
+.confirm-enter-from,
+.confirm-leave-to {
+  opacity: 0;
+}
+.confirm-enter-from > div,
+.confirm-leave-to > div {
+  transform: scale(0.95);
 }
 </style>

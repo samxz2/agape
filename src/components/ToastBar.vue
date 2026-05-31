@@ -12,8 +12,8 @@ const cart = useCartStore(pinia)
       class="fixed top-4 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300"
       :class="cart.toastMessage ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'"
     >
-      <div class="flex items-center gap-2 bg-green-600 text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-semibold">
-        <CheckCircle :size="18" />
+      <div class="flex items-center gap-2 bg-brown-600 text-cream-50 px-5 py-3 rounded-2xl shadow-xl text-sm font-semibold">
+        <CheckCircle :size="18" class="text-gold-300" />
         {{ cart.toastMessage }}
       </div>
     </div>
