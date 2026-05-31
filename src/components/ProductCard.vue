@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useCartStore } from '../stores/cartStore'
 import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
-import { ShoppingCart, Heart, Minus, Plus } from 'lucide-vue-next'
+import { ShoppingCart, Minus, Plus } from 'lucide-vue-next'
 import type { Producto } from '../data/productos'
 import { FALLBACK_IMAGE } from '../data/constants'
 import ProductModalMobile from './ProductModalMobile.vue'
@@ -13,7 +13,6 @@ const props = defineProps<{ producto: Producto }>()
 const cart = useCartStore(pinia)
 const currencyStore = useCurrencyStore(pinia)
 const modalOpen = ref(false)
-const isLiked = ref(false)
 const isMobile = ref(false)
 const imagenCargada = ref(false)
 const imgRef = ref<HTMLImageElement | null>(null)
@@ -53,11 +52,6 @@ function addToCart(e: Event) {
   setTimeout(() => { animatingAdd.value = false }, 600)
 }
 
-function toggleLike(e: Event) {
-  e.stopPropagation()
-  isLiked.value = !isLiked.value
-}
-
 function getPrecioActual(): number {
   return props.producto.enOferta && props.producto.precioOferta 
     ? props.producto.precioOferta 
@@ -95,15 +89,15 @@ function badgeText() {
 <template>
   <div
     @click="modalOpen = true"
-    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 cursor-pointer border border-cream-200/60 hover:border-gold-300/50 flex flex-col"
+    class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col"
   >
     <!-- Imagen -->
-    <div class="relative overflow-hidden bg-gradient-to-b from-cream-100 to-cream-50 aspect-[4/5]">
+    <div class="relative overflow-hidden bg-gradient-to-br from-cream-200 to-cream-100 aspect-[3/4]">
       <img
         ref="imgRef"
         :src="producto.imagen"
         :alt="producto.nombre"
-        class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out-expo"
+        class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ease-out-expo"
         :class="imagenCargada ? 'opacity-100' : 'opacity-0'"
         loading="lazy"
         @load="imagenCargada = true"
@@ -112,42 +106,35 @@ function badgeText() {
 
       <div
         v-if="!imagenCargada"
-        class="absolute inset-0 bg-gradient-to-br from-cream-100 via-cream-50 to-cream-200 animate-shimmer"
+        class="absolute inset-0 bg-gradient-to-br from-cream-200 via-cream-100 to-cream-300 animate-shimmer"
       />
 
-      <div class="img-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <!-- Badges -->
-      <div class="absolute top-2 left-2 flex flex-col gap-1">
+      <!-- Badge Oferta -->
+      <div class="absolute top-2 left-2">
         <span
           v-if="producto.enOferta"
-          class="bg-rose-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg"
+          class="bg-gold-400 text-brown-800 text-[10px] font-bold px-2.5 py-1 rounded-lg shadow-lg"
         >
           Oferta
         </span>
+      </div>
+
+      <!-- Badge descuento -->
+      <div class="absolute top-2 right-2">
         <span
           v-if="producto.oldPrice"
-          class="bg-brown-600/80 text-cream-50 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-lg backdrop-blur-sm"
+          class="bg-brown-800/70 text-cream-50 text-[10px] font-bold px-2.5 py-1 rounded-lg shadow-lg"
         >
           -{{ Math.round(((producto.oldPrice - getPrecioActual()) / producto.oldPrice) * 100) }}%
         </span>
       </div>
 
-      <!-- Like button -->
-      <button
-        @click="toggleLike"
-        class="absolute top-2 right-2 w-7 h-7 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 duration-300"
-      >
-        <Heart
-          :size="13"
-          :class="isLiked ? 'fill-rose-500 text-rose-500' : 'text-brown-500'"
-        />
-      </button>
-
       <!-- Estado envío -->
       <div class="absolute bottom-2 left-2">
         <span
-          class="text-[9px] px-2 py-0.5 rounded-full font-semibold capitalize shadow-lg"
+          class="text-[10px] px-2.5 py-1 rounded-lg font-semibold capitalize shadow-md"
           :class="badgeColor()"
         >
           {{ badgeText() }}
@@ -156,66 +143,75 @@ function badgeText() {
     </div>
 
     <!-- Info -->
-    <div class="p-2.5 flex flex-col flex-1 gap-1">
-      <!-- Categoria -->
+    <div class="p-3 flex flex-col flex-1 gap-1.5 bg-gradient-to-b from-white to-cream-50">
+      <!-- Categoria y moneda -->
       <div class="flex items-center justify-between">
-        <span class="text-[9px] text-brown-400 uppercase tracking-widest font-semibold">
+        <span class="text-[10px] text-brown-400 uppercase tracking-widest font-semibold">
           {{ producto.categoria }}
         </span>
-        <span class="text-[7px] text-brown-300 font-medium">
+        <span class="text-[8px] text-brown-300 font-medium bg-cream-100 px-1.5 py-0.5 rounded-md">
           {{ currencyStore.currency === 'USD' ? '$ USD' : 'Bs.' }}
         </span>
       </div>
 
       <!-- Nombre -->
-      <h3 class="font-playfair text-[11px] text-brown-700 font-semibold leading-snug line-clamp-2 flex-1">
+      <h3 class="font-playfair text-sm text-brown-800 font-semibold leading-snug line-clamp-2 flex-1">
         {{ producto.nombre }}
       </h3>
 
       <!-- Precio -->
-      <div class="flex items-baseline gap-2">
+      <div class="flex items-baseline gap-2 mt-auto">
         <span
-          class="text-sm font-bold"
-          :class="producto.enOferta ? 'text-rose-600' : 'text-brown-600'"
+          class="text-base font-black"
+          :class="producto.enOferta ? 'text-rose-500' : 'text-brown-700'"
         >
           {{ currencyStore.convertirPrecio(getPrecioActual()) }}
         </span>
         <span
           v-if="producto.oldPrice"
-          class="text-[10px] text-brown-300 line-through"
+          class="text-[11px] text-brown-300 line-through"
         >
           {{ currencyStore.convertirPrecio(producto.oldPrice) }}
         </span>
       </div>
 
-      <!-- Cantidad selector -->
-      <div v-if="disponible" class="flex items-center justify-between bg-cream-100 rounded-lg p-0.5">
+      <div class="h-px bg-gradient-to-r from-transparent via-cream-200 to-transparent" />
+
+      <!-- Cantidad + botón en fila -->
+      <div v-if="disponible" class="flex items-center gap-2">
+        <div class="flex items-center bg-cream-100 rounded-lg">
+          <button
+            @click.stop="cantidad = Math.max(1, cantidad - 1)"
+            class="w-7 h-7 flex items-center justify-center hover:bg-cream-200 rounded-l-lg transition-colors"
+          >
+            <Minus :size="10" class="text-brown-600" />
+          </button>
+          <span class="text-xs font-bold text-brown-700 w-5 text-center">{{ cantidad }}</span>
+          <button
+            @click.stop="cantidad = cantidad + 1"
+            class="w-7 h-7 flex items-center justify-center hover:bg-cream-200 rounded-r-lg transition-colors"
+          >
+            <Plus :size="10" class="text-brown-600" />
+          </button>
+        </div>
         <button
-          @click.stop="cantidad = Math.max(1, cantidad - 1)"
-          class="w-5 h-5 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
+          @click.stop="addToCart"
+          class="flex-1 flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-xl transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md"
+          :class="disponible
+            ? 'bg-brown-700 hover:bg-brown-600 text-cream-50'
+            : 'bg-brown-200 text-brown-400 cursor-not-allowed'"
         >
-          <Minus :size="9" class="text-brown-500" />
-        </button>
-        <span class="text-[10px] font-bold text-brown-700 w-4 text-center">{{ cantidad }}</span>
-        <button
-          @click.stop="cantidad = cantidad + 1"
-          class="w-5 h-5 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
-        >
-          <Plus :size="9" class="text-brown-500" />
+          <ShoppingCart :size="13" :class="animatingAdd ? 'animate-bounce-once' : ''" />
+          Añadir
         </button>
       </div>
-
-      <!-- Botón Añadir al carrito -->
       <button
-        @click="addToCart"
-        :disabled="!disponible"
-        class="w-full flex items-center justify-center gap-1.5 text-[10px] font-semibold py-1.5 rounded-lg transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md"
-        :class="disponible
-          ? 'bg-brown-600 hover:bg-brown-500 text-cream-50'
-          : 'bg-brown-200 text-brown-400 cursor-not-allowed'"
+        v-else
+        disabled
+        class="w-full flex items-center justify-center gap-1.5 text-xs font-bold py-2 rounded-xl bg-brown-200 text-brown-400 cursor-not-allowed"
       >
-        <ShoppingCart :size="12" :class="animatingAdd ? 'animate-bounce-once' : ''" />
-        <span>{{ disponible ? 'Añadir' : 'No disponible' }}</span>
+        <ShoppingCart :size="13" />
+        No disponible
       </button>
     </div>
   </div>

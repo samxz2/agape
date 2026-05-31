@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cream - soft, warm */
-  --color-cream-50: #fefcf9;
-  --color-cream-100: #fcf8f2;
-  --color-cream-200: #f7efe3;
-  --color-cream-300: #efe1cd;
-  --color-cream-400: #e4ceac;
+  /* Light brown - marrón claro */
+  --color-cream-50: #f5eee7;
+  --color-cream-100: #ece0d4;
+  --color-cream-200: #e0cfbe;
+  --color-cream-300: #d2bda6;
+  --color-cream-400: #c4aa8e;
 
   /* Brown - soft, light */
   --color-brown-50: #f8f3ed;
