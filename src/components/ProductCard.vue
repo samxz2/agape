@@ -70,6 +70,15 @@ function handleImageError(e: Event) {
   imagenCargada.value = true
 }
 
+function cerrarModal() {
+  modalOpen.value = false
+  const url = new URL(window.location.href)
+  if (url.searchParams.has('producto')) {
+    url.searchParams.delete('producto')
+    window.history.replaceState({}, '', url.toString())
+  }
+}
+
 function badgeColor() {
   if (props.producto.estadoEnvio === 'disponible') return 'bg-green-500/90 text-white'
   if (props.producto.estadoEnvio === 'proximamente') return 'bg-amber-400/90 text-brown-800'
@@ -216,7 +225,7 @@ function badgeText() {
     <ProductModalMobile
       v-if="modalOpen && isMobile"
       :producto="producto"
-      @close="modalOpen = false"
+      @close="cerrarModal"
       @add-to-cart="disponible ? cart.agregarAlCarrito(producto) : null"
     />
   </Transition>
@@ -226,7 +235,7 @@ function badgeText() {
     <ProductModalDesktop
       v-if="modalOpen && !isMobile"
       :producto="producto"
-      @close="modalOpen = false"
+      @close="cerrarModal"
       @add-to-cart="disponible ? cart.agregarAlCarrito(producto) : null"
     />
   </Transition>

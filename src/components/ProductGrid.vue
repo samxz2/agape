@@ -48,13 +48,11 @@ onMounted(() => {
 
   window.addEventListener('categoria-change', handleCategoriaChange)
   window.addEventListener('buscar-change', handleBuscarChange)
-  window.addEventListener('producto-change', handleProductoChange)
 })
 
 onUnmounted(() => {
   window.removeEventListener('categoria-change', handleCategoriaChange)
   window.removeEventListener('buscar-change', handleBuscarChange)
-  window.removeEventListener('producto-change', handleProductoChange)
 })
 
 function handleCategoriaChange(e: Event) {
@@ -66,14 +64,6 @@ function handleCategoriaChange(e: Event) {
 function handleBuscarChange(e: Event) {
   busqueda.value = (e as CustomEvent).detail
   paginaActual.value = 1
-}
-
-function handleProductoChange(e: Event) {
-  const id = (e as CustomEvent).detail
-  const url = new URL(window.location.href)
-  url.searchParams.set('producto', String(id))
-  window.history.pushState({}, '', url.toString())
-  window.location.reload()
 }
 
 let debounceTimer: ReturnType<typeof setTimeout>

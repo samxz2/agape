@@ -20,10 +20,7 @@ const relacionados = computed(() =>
 
 function abrirRelacionado(id: number) {
   emit('close')
-  const url = new URL(window.location.href)
-  url.searchParams.set('producto', String(id))
-  window.history.pushState({}, '', url.toString())
-  window.dispatchEvent(new CustomEvent('producto-change', { detail: id }))
+  window.location.href = `/?producto=${id}`
 }
 
 function sanitizeCantidad() {
