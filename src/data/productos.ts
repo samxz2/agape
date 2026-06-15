@@ -357,7 +357,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -385,7 +385,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
