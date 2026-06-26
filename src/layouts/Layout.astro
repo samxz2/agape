@@ -33,6 +33,11 @@ const { title = 'Agape Collection Parfum' } = Astro.props
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.ibb.co/CpHdX08t/1001879919.png" />
+
+    <!-- FOUC fix: bg inline antes que cargue Tailwind -->
+    <style>
+      body { background-color: #f5eee7; }
+    </style>
   </head>
   <body class="bg-cream-50 text-brown-700 min-h-screen">
     <Navbar client:load />
@@ -40,7 +45,7 @@ const { title = 'Agape Collection Parfum' } = Astro.props
     <ToastBar client:idle />
     <Analytics />
     <SpeedInsights />
-    <main>
+    <main class="pt-16 md:pt-20">
       <slot />
     </main>
     <footer class="bg-cream-100 border-t border-cream-200 text-center py-10 mt-16">

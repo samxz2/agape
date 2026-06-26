@@ -36,9 +36,7 @@ function getPrecioActual(): number {
 }
 
 function addWithQuantity() {
-  for (let i = 0; i < cantidad.value; i++) {
-    emit('add-to-cart')
-  }
+  emit('add-to-cart', cantidad.value)
   emit('close')
 }
 
@@ -72,7 +70,7 @@ function handleKeydown(e: KeyboardEvent) {
     @click="onBackdrop"
   >
     <div
-      class="bg-cream-50 w-full max-h-[85vh] rounded-t-2xl overflow-hidden shadow-2xl flex flex-col animate-slide-up"
+      class="bg-cream-50 w-full max-h-[85vh] rounded-t-3xl overflow-hidden shadow-2xl flex flex-col animate-slide-up"
       @click.stop
     >
       <!-- Swipe Indicator -->
@@ -120,13 +118,16 @@ function handleKeydown(e: KeyboardEvent) {
         <h2 class="font-playfair text-sm text-brown-700 font-bold leading-snug">{{ producto.nombre }}</h2>
 
         <div class="flex items-baseline gap-2">
-          <span class="text-lg font-bold" :class="producto.enOferta ? 'text-rose-600' : 'text-brown-600'">
+          <span v-if="producto.estadoEnvio === 'disponible'" class="text-lg font-bold" :class="producto.enOferta ? 'text-rose-600' : 'text-brown-600'">
             {{ currencyStore.convertirPrecio(getPrecioActual()) }}
           </span>
-          <span v-if="producto.oldPrice" class="text-xs text-brown-300 line-through">
+          <span v-else class="text-xs font-semibold text-amber-500">
+            Próximamente
+          </span>
+          <span v-if="producto.oldPrice && producto.estadoEnvio === 'disponible'" class="text-xs text-brown-300 line-through">
             {{ currencyStore.convertirPrecio(producto.oldPrice) }}
           </span>
-          <span v-if="producto.enOferta && producto.oldPrice" class="bg-rose-100 text-rose-600 text-[9px] font-bold px-1 py-0.5 rounded">
+          <span v-if="producto.enOferta && producto.oldPrice && producto.estadoEnvio === 'disponible'" class="bg-rose-100 text-rose-600 text-[9px] font-bold px-1 py-0.5 rounded">
             -{{ Math.round(((producto.oldPrice - getPrecioActual()) / producto.oldPrice) * 100) }}%
           </span>
         </div>
@@ -164,10 +165,10 @@ function handleKeydown(e: KeyboardEvent) {
         <!-- Cantidad -->
         <div class="flex items-center justify-between">
           <span class="text-[11px] text-brown-500 font-medium">Cantidad:</span>
-          <div class="flex items-center gap-1.5 bg-white rounded-lg border border-cream-200/60 p-0.5">
+          <div class="flex items-center gap-1.5 bg-white rounded-full border border-cream-200/60 p-0.5">
             <button 
               @click="cantidad = Math.max(1, cantidad - 1)" 
-              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
+              class="w-6 h-6 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Minus :size="10" />
             </button>
@@ -180,14 +181,14 @@ function handleKeydown(e: KeyboardEvent) {
             />
             <button 
               @click="cantidad = cantidad + 1" 
-              class="w-6 h-6 rounded bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
+              class="w-6 h-6 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Plus :size="10" />
             </button>
           </div>
         </div>
 
-        <button @click="addWithQuantity" :disabled="producto.estadoEnvio !== 'disponible'" class="w-full flex items-center justify-center gap-2 font-bold py-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-lg text-xs" :class="producto.estadoEnvio === 'disponible' ? 'bg-brown-600 hover:bg-brown-500 text-cream-50' : 'bg-brown-200 text-brown-400 cursor-not-allowed'">
+        <button @click="addWithQuantity" :disabled="producto.estadoEnvio !== 'disponible'" class="w-full flex items-center justify-center gap-2 font-bold py-2.5 rounded-full transition-all duration-200 active:scale-[0.98] shadow-lg text-xs" :class="producto.estadoEnvio === 'disponible' ? 'bg-gold-400 hover:bg-gold-300 text-brown-800' : 'bg-brown-200 text-brown-400 cursor-not-allowed'">
           <ShoppingCart :size="15" />
           {{ producto.estadoEnvio === 'disponible' ? `Añadir — ${currencyStore.convertirPrecio(getPrecioActual() * cantidad)}` : 'No disponible' }}
         </button>
@@ -200,7 +201,7 @@ function handleKeydown(e: KeyboardEvent) {
               v-for="rel in relacionados"
               :key="rel.id"
               @click="abrirRelacionado(rel.id)"
-              class="group shrink-0 w-24 bg-white rounded-xl overflow-hidden border border-cream-200 hover:border-gold-300/50 transition-all text-left cursor-pointer"
+              class="group shrink-0 w-24 bg-white rounded-2xl overflow-hidden border border-cream-200 hover:border-gold-300/50 transition-all text-left cursor-pointer"
             >
               <div class="aspect-square bg-cream-50 overflow-hidden">
                 <img

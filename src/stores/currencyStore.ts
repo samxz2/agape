@@ -13,10 +13,18 @@ export const useCurrencyStore = defineStore('currency', () => {
   const isUSD = computed(() => currency.value === 'USD')
   const isBS = computed(() => currency.value === 'BS')
   
+  function hasLocalStorage(): boolean {
+    try {
+      return typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function'
+    } catch {
+      return false
+    }
+  }
+
   // Actions
   function setCurrency(newCurrency: 'USD' | 'BS') {
     currency.value = newCurrency
-    if (typeof localStorage !== 'undefined') {
+    if (hasLocalStorage()) {
       localStorage.setItem('preferred-currency', newCurrency)
     }
     const cartStore = useCartStore(pinia)
@@ -25,7 +33,7 @@ export const useCurrencyStore = defineStore('currency', () => {
   
   function toggleCurrency() {
     currency.value = currency.value === 'USD' ? 'BS' : 'USD'
-    if (typeof localStorage !== 'undefined') {
+    if (hasLocalStorage()) {
       localStorage.setItem('preferred-currency', currency.value)
     }
     const cartStore = useCartStore(pinia)
@@ -34,7 +42,7 @@ export const useCurrencyStore = defineStore('currency', () => {
   
   function loadCurrencyFromStorage() {
     try {
-      if (typeof localStorage === 'undefined') return
+      if (!hasLocalStorage()) return
       const saved = localStorage.getItem('preferred-currency') as 'USD' | 'BS' | null
       if (saved && (saved === 'USD' || saved === 'BS')) {
         currency.value = saved

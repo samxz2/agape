@@ -6,7 +6,7 @@ export interface Producto {
   oldPrice: number | null
   precioOferta: number | null
   enOferta: boolean
-  estadoEnvio: string
+  estadoEnvio: 'disponible' | 'proximamente' | 'agotado'
   descripcion: string
   intensidad: string
   imagen: string
@@ -211,7 +211,7 @@ export const productos: Producto[] = [
   },
   {
     id: 12,
-    nombre: "ARMAF CLUB DE NUIT EDP WOMEN",
+    nombre: "ARMAF CLUB DE NUIT EDP 105ML WOMEN",
     categoria: "dama",
     precio: 37,
     oldPrice: null,
@@ -225,7 +225,7 @@ export const productos: Producto[] = [
   },
   {
     id: 13,
-    nombre: "ARMAF CLUB DE NUIT UNTOLD EDP UNISEX",
+    nombre: "ARMAF CLUB DE NUIT UNTOLD EDP 105ML UNISEX",
     categoria: "unisex",
     precio: 47,
     oldPrice: null,
@@ -267,7 +267,7 @@ export const productos: Producto[] = [
   },
   {
     id: 16,
-    nombre: "ARMAF CLUB DE NUIT BLING EDP SPR MEN",
+    nombre: "ARMAF CLUB DE NUIT BLING EDP 105ML SPR MEN",
     categoria: "caballero",
     precio: 54,
     oldPrice: null,
@@ -754,5 +754,621 @@ export const productos: Producto[] = [
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
     imagen: "https://i.ibb.co/NdwtdxzN/b1815ba2d48b5e17b339285500ffc2c5.jpg"
+  },
+  {
+    id: 54,
+    nombre: "AFNAN 9PM NIGHT OUT UNISEX 100ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/35R63cCq/6c9b32a2767cdcef0ce269de51b46023.jpg"
+  },
+  {
+    id: 55,
+    nombre: "ARMAF TAG HIM EDP 100ML",
+    categoria: "caballero",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/234zqHhS/8c05e5cd9d8ec0a3b8391cf4bf906ceb.jpg"
+  },
+  {
+    id: 56,
+    nombre: "ARMAF VENTANA EDP 100ML",
+    categoria: "caballero",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/ZpnrXWXK/9da01ac1923695cc41d43b86a60d3fa8.jpg"
+  },
+  {
+    id: 57,
+    nombre: "ARMAF CLUB DE NUIT URBAN EDP 105ML",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/b5mbSFRm/35347d3a90f46c8d6e274bdac1d7ff29.jpg"
+  },
+  {
+    id: 58,
+    nombre: "ARMAF ODYSSEY HOMME EDP 100ML",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/vvCcGMFq/47f96819e60771e37afd2e06a718c80a.jpg"
+  },
+  {
+    id: 59,
+    nombre: "ARMAF CLUB DE NUIT URBAN ELIXIR EDP 105ML",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/R4P1YDLb/e2b52843b162cb5e40ce3d821beaaa6d.jpg"
+  },
+  {
+    id: 60,
+    nombre: "ARMAF CLUB DE NUIT ICONIC BLUE EDP 105ML",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/f3fZR3G/65bfd5bd0c7f326e5f79316aa64ba8da.jpg"
+  },
+  {
+    id: 61,
+    nombre: "ARMAF ODYSSEY AQUA EDITION EDP 200ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/jvJDdSvV/bd474b8d8e38f10a27edd0f21689855d.jpg"
+  },
+  {
+    id: 62,
+    nombre: "ARMAF ODYSSEY ARTISTO EDP 100ML",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/gYxgwkq/fd8601a04f3fecc8bbace140c7df12ec.jpg"
+  },
+  {
+    id: 63,
+    nombre: "ARMAF BEACH PARTY EDP 100ML",
+    categoria: "unisex",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/21wyCB88/b4d6388276e366e2ca8d67320f88b4e6.jpg"
+  },
+  {
+    id: 64,
+    nombre: "ARMAF ODYSSEY MANDARIN SKY ELIXIR LIMITED EDITION EDP 100ML",
+    categoria: "caballero",
+    precio: 55,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Alta",
+    imagen: "https://i.ibb.co/Sz4YZcM/1eed70197776c6e17cf8c677a7677013.jpg"
+  },
+  {
+    id: 65,
+    nombre: "ARMAF TAG UOMO ROSSO EDP 100ML",
+    categoria: "caballero",
+    precio: 28,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/KjvrxKgP/f2982f11d9bbbdb00e301b646dd1afbb.jpg"
+  },
+  {
+    id: 66,
+    nombre: "ARMAF DELIGHTS BON BON EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 32,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/0RSr6TMj/b02f1e43f4ca4ab9c0d2f53bc1359a37.jpg"
+  },
+  {
+    id: 67,
+    nombre: "SET ARMAF ODYSSEY MANDARIN SKY LTD 3.4 EDP 10 ML TRAVEL SPR 3.4 SG 6.8 BODY SPR MAN",
+    categoria: "unisex",
+    precio: 55,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/ymB7f0vx/a4681d222ee1faae94b4767d990e759e.jpg"
+  },
+  {
+    id: 68,
+    nombre: "ARMAF DUNESCAPE EDP 100ML",
+    categoria: "unisex",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/gbYpzqSD/d142ccc41219b3296560b52f3fa2c00c.jpg"
+  },
+  {
+    id: 69,
+    nombre: "ROME LA BOMBA EDP 100ML MEN",
+    categoria: "caballero",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/xxkLZFk/fb0fb9732b05accfe45f8c1062443df1.png"
+  },
+  {
+    id: 70,
+    nombre: "AMOR AMOR EDT 100ML WOMEN",
+    categoria: "dama",
+    precio: 20,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/Kzc87TnD/d24c22b4888e3632ce3ffddb3e0ba243.jpg"
+  },
+  {
+    id: 71,
+    nombre: "CK ONE EDT 100ML UNISEX",
+    categoria: "unisex",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/Gh7Nmt0/f9b216a0448a13ecebd9caa9d65e99d8.jpg"
+  },
+  {
+    id: 72,
+    nombre: "CAROLINA CH LA BOMBA EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/nNmcPPc4/3e46c1cbec9fae67a626c1c9482c9d34.jpg"
+  },
+  {
+    id: 73,
+    nombre: "CLINIQUE HAPPY EDP 100ML MEN",
+    categoria: "caballero",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/chCVJgqZ/5bad4aeca30e9b38c644dc8abf60fba6.jpg"
+  },
+  {
+    id: 74,
+    nombre: "DUMONT NITRO BLACK EDP 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 38,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Alta",
+    imagen: "https://i.ibb.co/Wpy73XyK/4911f1b958ee9639f6bb94e84451632d.jpg"
+  },
+  {
+    id: 75,
+    nombre: "DUMONT NITRO WHITE EDP 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 38,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/8nWKWfSD/d66bb68a38c69587f9e67e820eaf37b6.jpg"
+  },
+  {
+    id: 76,
+    nombre: "DUMONT NITRO RED INTENSELY EDP 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Alta",
+    imagen: "https://i.ibb.co/Y4sDzmwX/b8ab6fb0d40cbba265572b46a7ff4890.jpg"
+  },
+  {
+    id: 77,
+    nombre: "FRENCH AVENUE VULCAN BAIE EDP 100ML",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/h57KSvC/b7e503660cee7b1a312d5afb61f2495e.jpg"
+  },
+  {
+    id: 78,
+    nombre: "FRENCH AVENUE LIQUID BRUN BROWN EDP 100ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/PZ8RFfY4/6d7c86a8b99aec1466c3715c69570ec4.jpg"
+  },
+  {
+    id: 79,
+    nombre: "FRENCH AVENUE VULCAN FEU EDP 100ML",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/gFXZJtNZ/a9a00bfa87f3fbda4bdcd4b2e8500246.jpg"
+  },
+  {
+    id: 80,
+    nombre: "GIVENCHY PI EDT 100ML MEN",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/5WjPDRpY/ed04b7ce3414e4bfce69a7cc4d9e09bb.jpg"
+  },
+  {
+    id: 81,
+    nombre: "GIVENCHY PI TESTER EDT 100ML MEN",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/VcVz1wdC/6ed5fcb1e096423777a72c8e2c484aa0.jpg"
+  },
+  {
+    id: 82,
+    nombre: "LATTAFA HAYAATI EDP 100ML",
+    categoria: "unisex",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/fYj1drJh/313dc8402ed56564b15d3d3fb56d8987.jpg"
+  },
+  {
+    id: 83,
+    nombre: "LATTAFA PRIDE ART OF UNIVERSE EDP 100ML",
+    categoria: "unisex",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/Q39M3V2k/afb4263c918865b9b1722752ba0b0899.jpg"
+  },
+  {
+    id: 84,
+    nombre: "LATTAFA ANGHAM EDP 100ML",
+    categoria: "unisex",
+    precio: 28,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/0RFvHLkP/3539b4eddb6c463d92a413557bc29015.jpg"
+  },
+  {
+    id: 85,
+    nombre: "LATTAFA MAYAR CHERRY INTENSE EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/z1YB2bq/63a14f08fd4eaa27b091d8fb77e79c0f.jpg"
+  },
+  {
+    id: 86,
+    nombre: "LATTAFA MAYAR NATURAL INTENSE EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 30,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/DDK9cxGd/31a569c36d9ddfe01a2f8c11a8279efb.jpg"
+  },
+  {
+    id: 87,
+    nombre: "LATTAFA PRIDE ISHQ AL SHUYUKH GOLD EDP 100ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/tM3bvQZQ/04a8a1c5dc1c9198123da6aa36944edd.jpg"
+  },
+  {
+    id: 88,
+    nombre: "LATTAFA PRIDE ISHQ AL SHUYUKH SILVER EDP 100ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/v6GvqXtG/bf50f0b2bb04f9cf3fc18ed4f517a858.jpg"
+  },
+  {
+    id: 89,
+    nombre: "NAUTICA VOYAGE EDT 100ML MEN",
+    categoria: "caballero",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/k2ZbZH6X/12fbdabef01f706f3539df9c0092f200.jpg"
+  },
+  {
+    id: 90,
+    nombre: "NAUTICA VOYAGE SPORT EDT 100ML MEN",
+    categoria: "caballero",
+    precio: 25,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/r8yhcs6/650d40a9a218c76c4d637522acdfbe65.jpg"
+  },
+  {
+    id: 91,
+    nombre: "PARIS HILTON EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 20,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/hxhgbgBX/35c7d148131b48f689107ef5a64c3234.jpg"
+  },
+  {
+    id: 92,
+    nombre: "360 RED EDP 100ML MEN",
+    categoria: "caballero",
+    precio: 22,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/5HbP3w9/d25cec57b8d87ce3fae6923c3ee31545.jpg"
+  },
+  {
+    id: 93,
+    nombre: "RASASI HAWAS EDP 100ML MEN",
+    categoria: "caballero",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media-Alta",
+    imagen: "https://i.ibb.co/VYz89HJP/8a11c19c1e6f9bba97595d5183ba2e29.jpg"
+  },
+  {
+    id: 94,
+    nombre: "RASASI HAWAS ICE EDP 100ML",
+    categoria: "unisex",
+    precio: 38,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/KzrNwqB5/7cae35622a8cdc0144d5db1ec75e4484.jpg"
+  },
+  {
+    id: 95,
+    nombre: "RASASI HAWAS DIVA EDP 100ML WOMEN",
+    categoria: "dama",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/nNdyjt7K/a8c7bfab19999e7c8f724790a4371848.jpg"
+  },
+  {
+    id: 96,
+    nombre: "RASASI HAWAS TROPICAL EDP 100ML",
+    categoria: "unisex",
+    precio: 35,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/BV9HTxQw/ae9352948b0184f34339bdf122a28fec.jpg"
+  },
+  {
+    id: 97,
+    nombre: "BLUE JEANS EDT 100ML MEN",
+    categoria: "caballero",
+    precio: 20,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "proximamente",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.ibb.co/N2n0VXHQ/e4d743724b10c1708fc6274aa172c106.jpg"
   }
 ]

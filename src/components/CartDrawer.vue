@@ -53,7 +53,7 @@ watch(() => cart.isOpen, (open) => {
             <ShoppingBag :size="24" class="text-brown-500" />
             <span
               v-if="cart.totalItems > 0"
-              class="absolute -top-2 -right-2 bg-brown-600 text-cream-50 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-md"
+              class="absolute -top-2 -right-2 bg-gold-400 text-brown-800 text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1 shadow-md"
             >
               {{ cart.totalItems }}
             </span>
@@ -71,7 +71,7 @@ watch(() => cart.isOpen, (open) => {
           </span>
           <button
             @click="cart.toggleCart()"
-            class="text-brown-400 hover:text-brown-600 p-2 rounded-lg hover:bg-cream-200/50 transition-all"
+            class="text-brown-400 hover:text-brown-600 p-2 rounded-full hover:bg-cream-200/50 transition-all"
           >
             <X :size="20" />
           </button>
@@ -95,7 +95,7 @@ watch(() => cart.isOpen, (open) => {
         </div>
         <button
           @click="cart.toggleCart()"
-          class="bg-brown-600 hover:bg-brown-500 text-cream-50 px-8 py-3 rounded-2xl text-sm font-bold transition-all shadow-lg"
+          class="bg-gold-400 hover:bg-gold-300 text-brown-800 px-8 py-3 rounded-full text-sm font-bold transition-all shadow-lg"
         >
           Ver productos
         </button>
@@ -105,7 +105,7 @@ watch(() => cart.isOpen, (open) => {
       <div
         v-for="item in cart.items"
         :key="item.id"
-        class="bg-white rounded-2xl p-3 shadow-sm border border-cream-200/60 flex gap-3 items-center"
+        class="bg-white rounded-3xl p-3 shadow-sm border border-cream-200/60 flex gap-3 items-center"
       >
         <img
           :src="item.imagen"
@@ -124,10 +124,10 @@ watch(() => cart.isOpen, (open) => {
 
           <!-- Controles cantidad -->
           <div class="flex items-center gap-2 mt-1">
-            <div class="flex items-center gap-1 bg-cream-100 rounded-lg p-0.5">
+            <div class="flex items-center gap-1 bg-cream-100 rounded-full p-0.5">
               <button
                 @click="cart.cambiarCantidad(item.id, item.cantidad - 1)"
-                class="w-6 h-6 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
+                class="w-6 h-6 rounded-full bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
               >
                 <Minus :size="10" class="text-brown-500" />
               </button>
@@ -136,7 +136,7 @@ watch(() => cart.isOpen, (open) => {
               </span>
               <button
                 @click="cart.cambiarCantidad(item.id, item.cantidad + 1)"
-                class="w-6 h-6 rounded-md bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
+                class="w-6 h-6 rounded-full bg-white hover:bg-cream-200 flex items-center justify-center transition-colors shadow-sm"
               >
                 <Plus :size="10" class="text-brown-500" />
               </button>
@@ -144,7 +144,7 @@ watch(() => cart.isOpen, (open) => {
 
             <button
               @click="cart.eliminarDelCarrito(item.id)"
-              class="ml-auto text-rose-400 hover:text-rose-600 p-1 rounded-lg hover:bg-rose-50 transition-all"
+              class="ml-auto text-rose-400 hover:text-rose-600 p-1.5 rounded-full hover:bg-rose-50 transition-all"
             >
               <Trash2 :size="14" />
             </button>
@@ -181,7 +181,7 @@ watch(() => cart.isOpen, (open) => {
 
       <button
         @click="cart.generarMensajeWhatsapp()"
-        class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold py-3.5 rounded-2xl transition-all duration-200 active:scale-[0.98] shadow-lg hover:shadow-xl text-sm"
+        class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold py-3.5 rounded-full transition-all duration-200 active:scale-[0.98] shadow-lg hover:shadow-xl text-sm"
       >
         <MessageCircle :size="20" />
         Pedir por WhatsApp
@@ -201,7 +201,7 @@ watch(() => cart.isOpen, (open) => {
         v-if="cart.showVaciarConfirm"
         class="absolute inset-0 z-10 bg-brown-900/20 backdrop-blur-sm flex items-center justify-center p-6"
       >
-        <div class="bg-cream-50 rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center space-y-4" @click.stop>
+        <div class="bg-cream-50 rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center space-y-4" @click.stop>
           <div class="w-14 h-14 bg-rose-100 rounded-full flex items-center justify-center mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-rose-500">
               <path d="M3 6h18"/>
@@ -216,13 +216,13 @@ watch(() => cart.isOpen, (open) => {
           <div class="flex gap-3">
             <button
               @click="cart.cancelarVaciar()"
-              class="flex-1 py-2.5 rounded-xl border border-cream-200 text-brown-600 text-sm font-semibold hover:bg-cream-100 transition-all"
+              class="flex-1 py-2.5 rounded-full border border-cream-200 text-brown-600 text-sm font-semibold hover:bg-cream-100 transition-all"
             >
               Cancelar
             </button>
             <button
               @click="cart.confirmarVaciar()"
-              class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-sm font-semibold hover:bg-rose-600 transition-all"
+              class="flex-1 py-2.5 rounded-full bg-rose-500 text-white text-sm font-semibold hover:bg-rose-600 transition-all"
             >
               Vaciar
             </button>

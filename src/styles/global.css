@@ -1,35 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* Light brown - marrón claro */
-  --color-cream-50: #f5eee7;
-  --color-cream-100: #ece0d4;
-  --color-cream-200: #e0cfbe;
-  --color-cream-300: #d2bda6;
-  --color-cream-400: #c4aa8e;
+  /* Cream - cálido luxe */
+  --color-cream-50: #f8f4ee;
+  --color-cream-100: #efe4d6;
+  --color-cream-200: #e3d2bc;
+  --color-cream-300: #d5bda0;
+  --color-cream-400: #c4a882;
 
-  /* Brown - soft, light */
-  --color-brown-50: #f8f3ed;
-  --color-brown-100: #ede2d4;
-  --color-brown-200: #dbc5a8;
-  --color-brown-300: #c4a37b;
-  --color-brown-400: #ad885e;
-  --color-brown-500: #946f49;
-  --color-brown-600: #7a5837;
-  --color-brown-700: #5e4126;
-  --color-brown-800: #3d2a18;
-  --color-brown-900: #23150c;
+  /* Brown - cálido rico */
+  --color-brown-50: #f7f1ea;
+  --color-brown-100: #e9ddd0;
+  --color-brown-200: #d6c0a4;
+  --color-brown-300: #be9e7a;
+  --color-brown-400: #a68158;
+  --color-brown-500: #8d6942;
+  --color-brown-600: #745433;
+  --color-brown-700: #5a3d22;
+  --color-brown-800: #3d2816;
+  --color-brown-900: #22140a;
 
-  /* Gold - soft, warm */
-  --color-gold-300: #e8ce8f;
-  --color-gold-400: #ddb86a;
-  --color-gold-500: #cfa44d;
+  /* Gold - vibrante luxe */
+  --color-gold-300: #e8cc80;
+  --color-gold-400: #dbb55a;
+  --color-gold-500: #cfa13f;
 
-  /* Rose gold accent */
-  --color-rose-300: #ecc8cb;
-  --color-rose-400: #dfaeb3;
-  --color-rose-500: #cf9299;
-
+  /* Bronze accent */
+  --color-bronze-400: #b8944f;
+  --color-bronze-500: #a07d3e;
   --font-playfair: "Playfair Display", serif;
   --font-lato: "Lato", sans-serif;
 

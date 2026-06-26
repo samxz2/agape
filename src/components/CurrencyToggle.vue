@@ -9,7 +9,7 @@ const currencyStore = useCurrencyStore(pinia)
 <template>
   <button
     @click="currencyStore.toggleCurrency()"
-    class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer"
+    class="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer"
     :class="currencyStore.currency === 'USD' 
       ? 'bg-cream-200/70 text-brown-600 hover:bg-cream-200' 
       : 'bg-brown-200/70 text-brown-700 hover:bg-brown-200'"

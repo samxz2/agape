@@ -34,6 +34,6 @@ No lint, typecheck, or test scripts exist.
 ## Conventions
 
 - **CSS:** Tailwind v4 with custom theme in `src/styles/global.css` (`@theme` block: `cream-{50..400}`, `brown-{50..900}`, `gold-{300,400}`; Playfair Display + Lato fonts).
-- **Typography:** Headings use `font-playfair`, body uses Lato (default via `font-lato` on `body`).
+- **Typography:** Headings use `font-playfair`, body uses Inter (default via `font-inter` on `body`).
 - **No lint/typecheck** — Astro's strict tsconfig applies at build time only.
 - **Node >=22.12.0** required.

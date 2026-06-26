@@ -172,9 +172,9 @@ function limpiarFiltros() {
       <div class="flex items-center gap-2 shrink-0 flex-wrap">
         <button
           @click="searchOpen = !searchOpen"
-          class="p-2 rounded-lg transition-all text-sm border"
+          class="p-2 rounded-full transition-all text-sm border"
           :class="searchOpen || busqueda
-            ? 'bg-brown-600 text-cream-50 border-brown-600'
+            ? 'bg-gold-400 text-brown-800 border-gold-400'
             : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
         >
           <Search :size="18" />
@@ -182,9 +182,9 @@ function limpiarFiltros() {
 
         <button
           @click="toggleSort"
-          class="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border"
+          class="flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold transition-all border"
           :class="ordenPor !== 'default'
-            ? 'bg-brown-600 text-cream-50 border-brown-600'
+            ? 'bg-gold-400 text-brown-800 border-gold-400'
             : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
         >
           <ArrowUpDown v-if="ordenPor === 'default'" :size="14" />
@@ -197,8 +197,8 @@ function limpiarFiltros() {
 
         <button
           @click="viewMode = 'grid'"
-          :class="viewMode === 'grid' ? 'bg-brown-600 text-cream-50 border-brown-600' : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
-          class="p-2 rounded-lg transition-all text-sm border"
+          :class="viewMode === 'grid' ? 'bg-gold-400 text-brown-800 border-gold-400' : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
+          class="p-2 rounded-full transition-all text-sm border"
           title="Vista cuadrícula"
         >
           <Grid3X3 :size="18" />
@@ -211,7 +211,7 @@ function limpiarFiltros() {
           v-model.number="precioMin"
           type="number"
           placeholder="Min $"
-          class="w-20 px-2 py-2 rounded-lg border border-cream-200 bg-white text-brown-700 text-xs outline-none focus:ring-2 focus:ring-gold-300/30"
+          class="w-20 px-2 py-2 rounded-full border border-cream-200 bg-white text-brown-700 text-xs outline-none focus:ring-2 focus:ring-gold-300/30"
           @input="paginaActual = 1"
         />
         <span class="text-brown-300 text-xs">—</span>
@@ -219,13 +219,13 @@ function limpiarFiltros() {
           v-model.number="precioMax"
           type="number"
           placeholder="Max $"
-          class="w-20 px-2 py-2 rounded-lg border border-cream-200 bg-white text-brown-700 text-xs outline-none focus:ring-2 focus:ring-gold-300/30"
+          class="w-20 px-2 py-2 rounded-full border border-cream-200 bg-white text-brown-700 text-xs outline-none focus:ring-2 focus:ring-gold-300/30"
           @input="paginaActual = 1"
         />
         <button
           v-if="precioMin || precioMax || busqueda || categoriaActiva !== 'todos' || soloOfertas"
           @click="limpiarFiltros"
-          class="text-[10px] text-brown-400 hover:text-brown-600 px-2 py-1"
+          class="text-[10px] text-brown-400 hover:text-gold-500 px-2 py-1"
         >
           Limpiar
         </button>
@@ -239,7 +239,7 @@ function limpiarFiltros() {
         v-model="busqueda"
         type="text"
         placeholder="Buscar por nombre..."
-        class="w-full pl-10 pr-4 py-3 rounded-xl border border-cream-200 bg-white text-brown-700 text-sm outline-none focus:ring-2 focus:ring-gold-300/30 focus:border-gold-300/50 placeholder-brown-300/60 transition-all"
+        class="w-full pl-10 pr-4 py-3 rounded-full border border-cream-200 bg-white text-brown-700 text-sm outline-none focus:ring-2 focus:ring-gold-300/30 focus:border-gold-300/50 placeholder-brown-300/60 transition-all"
       />
     </div>
 
@@ -255,9 +255,9 @@ function limpiarFiltros() {
           v-for="cat in categoriaCards"
           :key="cat.id"
           @click="seleccionarCategoria(cat.id)"
-          class="group relative bg-white rounded-2xl border border-cream-200 hover:border-gold-300/60 p-5 md:p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl text-center overflow-hidden cursor-pointer"
+          class="group relative bg-white rounded-3xl border border-cream-200 hover:border-gold-300/60 p-5 md:p-7 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl text-center overflow-hidden cursor-pointer"
         >
-          <span class="absolute top-3 right-3 bg-cream-100 text-brown-500 text-[10px] font-bold px-2 py-0.5 rounded-full group-hover:bg-brown-600 group-hover:text-cream-50 transition-colors duration-300">
+          <span class="absolute top-3 right-3 bg-cream-100 text-brown-500 text-[10px] font-bold px-2 py-0.5 rounded-full group-hover:bg-gold-400 group-hover:text-brown-800 transition-colors duration-300">
             {{ cat.count }}
           </span>
 
@@ -291,7 +291,7 @@ function limpiarFiltros() {
       </div>
       <p class="font-playfair text-xl text-brown-600">No encontramos resultados</p>
       <p class="text-sm text-brown-400 mt-2">Prueba con otra búsqueda o categoría</p>
-      <button @click="limpiarFiltros" class="mt-4 bg-brown-600 text-cream-50 px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-brown-500 transition-colors">
+      <button @click="limpiarFiltros" class="mt-4 bg-gold-400 text-brown-800 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gold-300 transition-colors">
         Limpiar filtros
       </button>
     </div>
@@ -318,7 +318,7 @@ function limpiarFiltros() {
         <button
           @click="irPagina(paginaActual - 1)"
           :disabled="paginaActual <= 1"
-          class="p-2 rounded-lg border border-cream-200 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cream-100"
+          class="p-2 rounded-full border border-cream-200 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cream-100"
         >
           <ChevronLeft :size="18" class="text-brown-500" />
         </button>
@@ -327,9 +327,9 @@ function limpiarFiltros() {
           v-for="pag in rangoPaginas"
           :key="pag"
           @click="irPagina(pag)"
-          class="min-w-[36px] h-9 rounded-lg text-xs font-semibold transition-all border"
+          class="min-w-[36px] h-9 rounded-full text-xs font-semibold transition-all border"
           :class="pag === paginaActual
-            ? 'bg-brown-600 text-cream-50 border-brown-600'
+            ? 'bg-gold-400 text-brown-800 border-gold-400'
             : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
         >
           {{ pag }}
@@ -338,7 +338,7 @@ function limpiarFiltros() {
         <button
           @click="irPagina(paginaActual + 1)"
           :disabled="paginaActual >= totalPaginas"
-          class="p-2 rounded-lg border border-cream-200 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cream-100"
+          class="p-2 rounded-full border border-cream-200 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-cream-100"
         >
           <ChevronRight :size="18" class="text-brown-500" />
         </button>

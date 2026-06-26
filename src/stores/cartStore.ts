@@ -9,8 +9,16 @@ export interface CartItem extends Producto {
 
 const CART_STORAGE_KEY = 'agape-cart-items'
 
+function hasLocalStorage(): boolean {
+  try {
+    return typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function'
+  } catch {
+    return false
+  }
+}
+
 function loadCartFromStorage(): CartItem[] {
-  if (typeof localStorage === 'undefined') return []
+  if (!hasLocalStorage()) return []
   try {
     const stored = localStorage.getItem(CART_STORAGE_KEY)
     if (stored) {
@@ -23,7 +31,7 @@ function loadCartFromStorage(): CartItem[] {
 }
 
 function saveCartToStorage(items: CartItem[]) {
-  if (typeof localStorage === 'undefined') return
+  if (!hasLocalStorage()) return
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
   } catch (e) {
@@ -35,7 +43,11 @@ export const useCartStore = defineStore('cart', () => {
   // Inicializar con datos guardados
   const items = ref<CartItem[]>(loadCartFromStorage())
   const isOpen = ref(false)
-  const currentCurrency = ref<'USD' | 'BS'>('USD')
+  const currentCurrency = ref<'USD' | 'BS'>(
+    hasLocalStorage()
+      ? (localStorage.getItem('preferred-currency') as 'USD' | 'BS') || 'USD'
+      : 'USD'
+  )
   const tasaCambio = ref(TASA_CAMBIO)
   const toastMessage = ref('')
   const showVaciarConfirm = ref(false)
@@ -74,12 +86,12 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  function agregarAlCarrito(producto: Producto) {
+  function agregarAlCarrito(producto: Producto, cantidad = 1) {
     const existente = items.value.find(i => i.id === producto.id)
     if (existente) {
-      existente.cantidad++
+      existente.cantidad += cantidad
     } else {
-      items.value.push({ ...producto, cantidad: 1 })
+      items.value.push({ ...producto, cantidad })
     }
     isOpen.value = true
     showToast(`${producto.nombre} añadido al carrito`)
@@ -113,7 +125,7 @@ export const useCartStore = defineStore('cart', () => {
   function confirmarVaciar() {
     items.value = []
     showVaciarConfirm.value = false
-    if (typeof localStorage !== 'undefined') {
+    if (hasLocalStorage()) {
       localStorage.removeItem(CART_STORAGE_KEY)
     }
     showToast('Carrito vaciado')
