@@ -21,7 +21,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
@@ -31,7 +31,7 @@ export const productos: Producto[] = [
     id: 2,
     nombre: "ARMAF CLUB DE NUIT INTENSE 105ML MEN",
     categoria: "caballero",
-    precio: 35,
+    precio: 39,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -42,7 +42,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/RkqHG4DV/15c1c77c3e00c0a0be37899f19bfacb7.jpg"
   },
   {
-    id: 48,
+    id: 3,
     nombre: "ISSEY MIYAKE EDT 125ML",
     categoria: "caballero",
     precio: 55,
@@ -56,7 +56,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/1YK9ybwW/aa72bbaa89d27c501cee03f5a9508937.jpg"
   },
    {
-    id: 49,
+    id: 4,
     nombre: "ISSEY MIYAKE EDT 200ML",
     categoria: "caballero",
     precio: 75,
@@ -70,7 +70,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/YFFMJyNT/482f2e30cbefef7b629deb40077a81b2.jpg"
   },
    {
-    id: 50,
+    id: 5,
     nombre: "ISSEY MIYAKE EDT 75ML",
     categoria: "caballero",
     precio: 45,
@@ -84,24 +84,24 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/Y7JG9MLm/fddf1564537abb660b332cfea6ee8c1e.jpg"
   },
   {
-    id: 3,
+    id: 6,
     nombre: "DUMONT NITRO RED EDP 100ML CABALLERO",
     categoria: "caballero",
-    precio: 45,
+    precio: 44,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
     imagen: "https://i.ibb.co/Lh9gTPGZ/fec78789ecaf969e3b3feb7c71cfaa8c.jpg"
   },
   {
-    id: 4,
+    id: 7,
     nombre: "BENETTON COLD 100ML CABALLERO",
     categoria: "caballero",
-    precio: 19,
+    precio: 18,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -112,7 +112,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/DPYdY3Jf/db52204e8266eee900959d286d0c4c51.jpg"
   },
   {
-    id: 5,
+    id: 8,
     nombre: "AB BLUE SEDUCTION EDT 100ML CABALLERO",
     categoria: "caballero",
     precio: 29,
@@ -126,38 +126,38 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/5gsDHq0r/8700e287874a8034867eed5b4dcabed6.jpg"
   },
   {
-    id: 6,
+    id: 9,
     nombre: "AFNAN 9PM EDP 100ML CABALLERO",
     categoria: "caballero",
     precio: 35,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
     imagen: "https://i.ibb.co/Xr4hWpCk/84f64447a3b7ad811809910c566cc9a6.jpg"
   },
   {
-    id: 7,
+    id: 10,
     nombre: "AL HARAMAIN AMBER OUD GOLD EDP 60ML",
     categoria: "unisex",
     precio: 60,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
     imagen: "https://i.ibb.co/GfjVdg2b/44622b203dc42ef9d2e1ac403e540acf.jpg"
   },
   {
-    id: 8,
+    id: 11,
     nombre: "ARMAF ODYSSEY SPECTRA EDP 100ML UNISEX",
     categoria: "unisex",
-    precio: 39,
+    precio: 37,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -168,7 +168,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/99TMz5y3/48f2399f0c377a80a9a8f2653a70df7a.jpg"
   },
   {
-    id: 9,
+    id: 12,
     nombre: "ARMAF ODYSSEY BAHAMAS TROPICAL EDP 100ML UNISEX",
     categoria: "unisex",
     precio: 49,
@@ -182,7 +182,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/TB6vDcNF/0d9eac32d3608c46a0dc3a65e7810af9.jpg"
   },
   {
-    id: 10,
+    id: 13,
     nombre: "AFNAN 9AM 100ML EDP WOMEN",
     categoria: "dama",
     precio: 38,
@@ -196,7 +196,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/tTw2NPB3/6a37133b89582f53fcbef4e6b0d9d1e8.jpg"
   },
   {
-    id: 11,
+    id: 14,
     nombre: "AFNAN 9AM DIVE UNISEX 100ML EDP SPRAY",
     categoria: "unisex",
     precio: 36,
@@ -210,7 +210,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/Gfv8GNsL/47c003ecccbc8c91d0e3c2e880ae26cf.jpg"
   },
   {
-    id: 12,
+    id: 15,
     nombre: "ARMAF CLUB DE NUIT EDP 105ML WOMEN",
     categoria: "dama",
     precio: 37,
@@ -224,7 +224,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/CKV8K7Gj/a5e9c0ce1cbe7a1f8bf7eaf15094673b.jpg"
   },
   {
-    id: 13,
+    id: 16,
     nombre: "ARMAF CLUB DE NUIT UNTOLD EDP 105ML UNISEX",
     categoria: "unisex",
     precio: 47,
@@ -238,7 +238,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/84GqyzJf/88a1df79760eb311b0dc66622c802cea.jpg"
   },
   {
-    id: 14,
+    id: 17,
     nombre: "ARMAF ODYSSEY CANDEE 100ML EDP WOMEN",
     categoria: "dama",
     precio: 29,
@@ -252,7 +252,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/0yZ175qj/bd774ffba7c8a8875834ed3e4c31a619.jpg"
   },
   {
-    id: 15,
+    id: 18,
     nombre: "ARMAF ODYSSEY MANDARIN SKY VINTAGE EDITION 100ML EDP SPR MEN",
     categoria: "caballero",
     precio: 45,
@@ -266,10 +266,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/WWY1CGC1/268b8fa4316b9a4a5f2e5d183c3dca59.jpg"
   },
   {
-    id: 16,
+    id: 19,
     nombre: "ARMAF CLUB DE NUIT BLING EDP 105ML SPR MEN",
     categoria: "caballero",
-    precio: 54,
+    precio: 53,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -280,10 +280,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/7JRC4nT2/fd504946ede24eacb819f5f1dbc6db65.jpg"
   },
   {
-    id: 17,
+    id: 20,
     nombre: "BHARARA ROME POUR FEMME 100ML EDP FOR WOMEN",
     categoria: "dama",
-    precio: 38,
+    precio: 40,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -294,10 +294,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/355NnjSG/91f8d09e182b7ece3b3a9158ea4a1f42.jpg"
   },
   {
-    id: 18,
+    id: 21,
     nombre: "MAST ROME POUR HOMME 100ML EDP FOR MEN",
     categoria: "caballero",
-    precio: 38,
+    precio: 40,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -308,10 +308,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/SDbDgg6V/31e78d8d9744da850a3c5b8168676e1d.jpg"
   },
   {
-    id: 19,
+    id: 22,
     nombre: "BHARARA MAST PERFUME ROME EXTRADOSE (VALENTINO) MEN 100ML",
     categoria: "caballero",
-    precio: 39,
+    precio: 40,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -322,7 +322,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/k2bG6hBJ/8755f198e1e15451bb291f4bfe7060cf.jpg"
   },
   {
-    id: 20,
+    id: 23,
     nombre: "BHARARA KING 100ML EDP MEN",
     categoria: "caballero",
     precio: 59,
@@ -336,10 +336,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/20Z57x53/d187c52c49893fefbf9db3fc0b9b9f7b.jpg"
   },
   {
-    id: 21,
+    id: 24,
     nombre: "BS FANTASY 100ML EDP WOMEN",
     categoria: "dama",
-    precio: 30,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -350,21 +350,21 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/RG7XLjpz/185017aeab0515b50f7a629de604707f.jpg"
   },
    {
-    id: 22,
+    id: 25,
     nombre: "STALLION 53 100ML UNISEX",
     categoria: "unisex",
     precio: 30,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
     imagen: "https://i.ibb.co/HpxG3xw6/c8112daff96ac40619139b8a9f3c7f81.jpg"
   },
    {
-    id: 23,
+    id: 26,
     nombre: "AL HARAMAIN AMBER OUD GOLD 120ML EDP UNISEX",
     categoria: "unisex",
     precio: 59,
@@ -378,21 +378,21 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/d48pTBFp/8af966bbb694251f31db991c7272f0ec.jpg"
   },
    {
-    id: 24,
+    id: 27,
     nombre: "SET LATTAFA ASAD COLLECTION 4X25ML C/U MEN",
     categoria: "sets",
-    precio: 44,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
     imagen: "https://i.ibb.co/6ccRvS6W/8da2b33f95f1449b48eb738cf75906c0.jpg"
   },
    {
-    id: 25,
+    id: 28,
     nombre: "LATTAFA ECLAIRE 100ML EDP SPRAY",
     categoria: "dama",
     precio: 39,
@@ -406,10 +406,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/ycTPB2Sk/95b24dc9c726faf6b049d40547e9bbed.jpg"
   },
    {
-    id: 26,
+    id: 29,
     nombre: "MINI SET LATTAFA YARA 4X5ML",
     categoria: "sets",
-    precio: 30,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -420,21 +420,21 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/YFNp6NxB/f2f6571c892ec88c4d44f8a0841cc0df.jpg"
   },
    {
-    id: 27,
+    id: 30,
     nombre: "SET LATTAFA YARA COLLECTION 4X25ML",
     categoria: "sets",
-    precio: 44,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
     imagen: "https://i.ibb.co/hJ8RLjcM/4d6313d37fbcb6047d1669c2a0c08f7c.jpg"
   },
    {
-    id: 28,
+    id: 31,
     nombre: "LATTAFA YARA ELIXIR 100ML EDP",
     categoria: "dama",
     precio: 40,
@@ -448,7 +448,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/PGT2PkKN/0c6b5ee868435c314960c60ee3e15ba1.jpg"
   },
    {
-    id: 29,
+    id: 32,
     nombre: "SET YARA 3PCS WITH 100ML EDP 12ML TRAVEL SPRAY 50ML HAIRMIST",
     categoria: "sets",
     precio: 47,
@@ -462,7 +462,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/pr2vkS7p/fb6531fba1f99b8e96feea9669d9d5fe.jpg"
   },
    {
-    id: 30,
+    id: 33,
     nombre: "LATTAFA ASAD BOURBON 3PCS WITH 100ML EDP 12ML TRAVEL SPR 100ML SHOWER GEL",
     categoria: "sets",
     precio: 47,
@@ -476,7 +476,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/bRyZXwFm/d95788b8d9e85b4c4994d07dbda96fc4.jpg"
   },
    {
-    id: 31,
+    id: 34,
     nombre: "LATTAFA QIMMAH 100ML EDP WOMEN",
     categoria: "dama",
     precio: 29,
@@ -490,7 +490,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/zhjYYFbs/ea481b4feabf8286c611752bbb7ae751.jpg"
   },
    {
-    id: 32,
+    id: 35,
     nombre: "LATTAFA QAED AL FURSAN 90ML UNISEX",
     categoria: "unisex",
     precio: 25,
@@ -504,7 +504,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/bMhdC4wb/78262e9499e6d3c5a809372d394d6d02.jpg"
   },
    {
-    id: 33,
+    id: 36,
     nombre: "LATTAFA FAKHAR 100ML EDP WOMEN",
     categoria: "dama",
     precio: 34,
@@ -518,10 +518,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/N4JvsR1/90776caed51071bcc18030b7a29cf970.jpg"
   },
    {
-    id: 34,
+    id: 37,
     nombre: "LATTAFA RAVE NOW BLACK 100ML EDP",
     categoria: "caballero",
-    precio: 30,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -532,7 +532,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/jd405QP/6873affbb39ffb57439b3e357eaf0afd.jpg"
   },
    {
-    id: 35,
+    id: 38,
     nombre: "LATTAFA YARA MOI 100ML EDP",
     categoria: "dama",
     precio: 35,
@@ -546,7 +546,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/HLr62mMq/b080ccf4e5eecaa499a96e0ad3d31e4d.jpg"
   },
    {
-    id: 36,
+    id: 39,
     nombre: "LATTAFA BADEE AL OUD HONOR AND GLORY 100ML",
     categoria: "unisex",
     precio: 34,
@@ -560,7 +560,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/CK9Qd4G5/93d8b5e8826042c9a1cebb52b6e8c2d9.jpg"
   },
    {
-    id: 37,
+    id: 40,
     nombre: "LATTAFA BADEE AL OUD SUBLIME 100ML EDP",
     categoria: "unisex",
     precio: 34,
@@ -574,7 +574,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/nNB8nxRV/509457bd58ab77d7e804a4b34b020d6f.jpg"
   },
   {
-    id: 38,
+    id: 41,
     nombre: "LATTAFA HAMBRA MUSAMAM WHITE INTENSE 100ML EDP",
     categoria: "dama",
     precio: 45,
@@ -588,10 +588,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/kg14ZFZZ/58d66a5d405c1d1f1c8da5668a1f9f20.jpg"
   },
   {
-    id: 39,
+    id: 42,
     nombre: "LATTAFA NOW RAVE PINK 100ML EPD WOMEN",
     categoria: "dama",
-    precio: 30,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -602,7 +602,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/TxRvPdLq/d4277f0d86871fab80a4a2124ea4aa9c.jpg"
   },
   {
-    id: 40,
+    id: 43,
     nombre: "LATTAFA YARA TOUS 100ML EDP WOMEN",
     categoria: "dama",
     precio: 35,
@@ -616,7 +616,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/Lh8b0T16/63e376524475db2922311ec09ab4fe26.jpg"
   },
     {
-    id: 41,
+    id: 44,
     nombre: "LATTAFA YARA CANDY 100ML EDP WOMEN",
     categoria: "dama",
     precio: 35,
@@ -630,10 +630,10 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/nMf9424d/b405fbac68cd195b14dedfb6715f5059.jpg"
   },
     {
-    id: 42,
+    id: 45,
     nombre: "LATTAFA BADEE AL OUD NOBLE BLUSH 100ML EDP WOMEN",
     categoria: "dama",
-    precio: 32,
+    precio: 33,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -644,7 +644,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/h1MKMRmb/65cfa0c5db2592cdd4f9974fabc1b790.jpg"
   },
     {
-    id: 43,
+    id: 46,
     nombre: "LATTAFA YARA 100ML EDP WOMEN",
     categoria: "dama",
     precio: 35,
@@ -658,7 +658,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/fVKc8W53/699a0b2a53163d2fae51a83751082f4b.jpg"
   },
     {
-    id: 44,
+    id: 47,
     nombre: "LATTAFA BADEE AL OUD AMETHYST 100ML EDP UNISEX",
     categoria: "unisex",
     precio: 35,
@@ -672,7 +672,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/4n7rmcT3/61d2ab7478190444e147c8d79fee3165.jpg"
   },
     {
-    id: 45,
+    id: 48,
     nombre: "LATTAFA KHAMRAH 100ML EDP UNISEX",
     categoria: "unisex",
     precio: 36,
@@ -686,7 +686,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/jkLys5cC/406012bf503ff02287027e75242a4ce7.jpg"
   },
     {
-    id: 46,
+    id: 49,
     nombre: "LATTAFA QAED AL FURSAN UNLIMITED 90ML EDP UNISEX",
     categoria: "unisex",
     precio: 25,
@@ -700,7 +700,7 @@ export const productos: Producto[] = [
     imagen: "https://i.ibb.co/v4Ysfjtn/272f0522444bb6c7aea60f299878f606.jpg"
   },
   {
-    id: 47,
+    id: 50,
     nombre: "LATTAFA YARA 2PCS 100ML EDP 200ML SPR",
     categoria: "sets",
     precio: 38,
@@ -721,7 +721,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "disponible",
+    estadoEnvio: "proximamente",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -745,7 +745,7 @@ export const productos: Producto[] = [
     id: 53,
     nombre: "CIEL JACQUES SAINT PRES EDP 100 ML DAMA",
     categoria: "dama",
-    precio: 20,
+    precio: 25,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
@@ -759,11 +759,11 @@ export const productos: Producto[] = [
     id: 54,
     nombre: "AFNAN 9PM NIGHT OUT UNISEX 100ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 54,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -773,25 +773,25 @@ export const productos: Producto[] = [
     id: 55,
     nombre: "ARMAF TAG HIM EDP 100ML",
     categoria: "caballero",
-    precio: 25,
+    precio: 35,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
-    imagen: "https://i.ibb.co/234zqHhS/8c05e5cd9d8ec0a3b8391cf4bf906ceb.jpg"
+    imagen: "https://www.facebook.com/947d2772-d7bb-48c8-9c5c-2edbb88ea4aa"
   },
   {
     id: 56,
     nombre: "ARMAF VENTANA EDP 100ML",
     categoria: "caballero",
-    precio: 30,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -801,11 +801,11 @@ export const productos: Producto[] = [
     id: 57,
     nombre: "ARMAF CLUB DE NUIT URBAN EDP 105ML",
     categoria: "caballero",
-    precio: 35,
+    precio: 38,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -815,11 +815,11 @@ export const productos: Producto[] = [
     id: 58,
     nombre: "ARMAF ODYSSEY HOMME EDP 100ML",
     categoria: "caballero",
-    precio: 40,
+    precio: 35,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -829,11 +829,11 @@ export const productos: Producto[] = [
     id: 59,
     nombre: "ARMAF CLUB DE NUIT URBAN ELIXIR EDP 105ML",
     categoria: "caballero",
-    precio: 40,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -843,11 +843,11 @@ export const productos: Producto[] = [
     id: 60,
     nombre: "ARMAF CLUB DE NUIT ICONIC BLUE EDP 105ML",
     categoria: "caballero",
-    precio: 35,
+    precio: 49,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -857,11 +857,11 @@ export const productos: Producto[] = [
     id: 61,
     nombre: "ARMAF ODYSSEY AQUA EDITION EDP 200ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 50,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -871,11 +871,11 @@ export const productos: Producto[] = [
     id: 62,
     nombre: "ARMAF ODYSSEY ARTISTO EDP 100ML",
     categoria: "caballero",
-    precio: 35,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -885,11 +885,11 @@ export const productos: Producto[] = [
     id: 63,
     nombre: "ARMAF BEACH PARTY EDP 100ML",
     categoria: "unisex",
-    precio: 30,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -899,11 +899,11 @@ export const productos: Producto[] = [
     id: 64,
     nombre: "ARMAF ODYSSEY MANDARIN SKY ELIXIR LIMITED EDITION EDP 100ML",
     categoria: "caballero",
-    precio: 55,
+    precio: 49,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
@@ -917,7 +917,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -927,11 +927,11 @@ export const productos: Producto[] = [
     id: 66,
     nombre: "ARMAF DELIGHTS BON BON EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 32,
+    precio: 55,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -940,12 +940,12 @@ export const productos: Producto[] = [
   {
     id: 67,
     nombre: "SET ARMAF ODYSSEY MANDARIN SKY LTD 3.4 EDP 10 ML TRAVEL SPR 3.4 SG 6.8 BODY SPR MAN",
-    categoria: "unisex",
-    precio: 55,
+    categoria: "sets",
+    precio: 59,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -955,11 +955,11 @@ export const productos: Producto[] = [
     id: 68,
     nombre: "ARMAF DUNESCAPE EDP 100ML",
     categoria: "unisex",
-    precio: 30,
+    precio: 45,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -969,11 +969,11 @@ export const productos: Producto[] = [
     id: 69,
     nombre: "ROME LA BOMBA EDP 100ML MEN",
     categoria: "caballero",
-    precio: 25,
+    precio: 40,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -983,11 +983,11 @@ export const productos: Producto[] = [
     id: 70,
     nombre: "AMOR AMOR EDT 100ML WOMEN",
     categoria: "dama",
-    precio: 20,
+    precio: 47,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -997,11 +997,11 @@ export const productos: Producto[] = [
     id: 71,
     nombre: "CK ONE EDT 100ML UNISEX",
     categoria: "unisex",
-    precio: 25,
+    precio: 36,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1011,11 +1011,11 @@ export const productos: Producto[] = [
     id: 72,
     nombre: "CAROLINA CH LA BOMBA EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 25,
+    precio: 170,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1025,11 +1025,11 @@ export const productos: Producto[] = [
     id: 73,
     nombre: "CLINIQUE HAPPY EDP 100ML MEN",
     categoria: "caballero",
-    precio: 30,
+    precio: 49,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1039,11 +1039,11 @@ export const productos: Producto[] = [
     id: 74,
     nombre: "DUMONT NITRO BLACK EDP 100ML CABALLERO",
     categoria: "caballero",
-    precio: 38,
+    precio: 43,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
@@ -1053,11 +1053,11 @@ export const productos: Producto[] = [
     id: 75,
     nombre: "DUMONT NITRO WHITE EDP 100ML CABALLERO",
     categoria: "caballero",
-    precio: 38,
+    precio: 43,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1067,11 +1067,11 @@ export const productos: Producto[] = [
     id: 76,
     nombre: "DUMONT NITRO RED INTENSELY EDP 100ML CABALLERO",
     categoria: "caballero",
-    precio: 40,
+    precio: 55,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Alta",
@@ -1081,11 +1081,11 @@ export const productos: Producto[] = [
     id: 77,
     nombre: "FRENCH AVENUE VULCAN BAIE EDP 100ML",
     categoria: "caballero",
-    precio: 35,
+    precio: 47,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1095,11 +1095,11 @@ export const productos: Producto[] = [
     id: 78,
     nombre: "FRENCH AVENUE LIQUID BRUN BROWN EDP 100ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 49,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1109,11 +1109,11 @@ export const productos: Producto[] = [
     id: 79,
     nombre: "FRENCH AVENUE VULCAN FEU EDP 100ML",
     categoria: "caballero",
-    precio: 35,
+    precio: 50,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1123,11 +1123,11 @@ export const productos: Producto[] = [
     id: 80,
     nombre: "GIVENCHY PI EDT 100ML MEN",
     categoria: "caballero",
-    precio: 40,
+    precio: 57,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1137,11 +1137,11 @@ export const productos: Producto[] = [
     id: 81,
     nombre: "GIVENCHY PI TESTER EDT 100ML MEN",
     categoria: "caballero",
-    precio: 35,
+    precio: 49,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1155,7 +1155,7 @@ export const productos: Producto[] = [
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1165,11 +1165,11 @@ export const productos: Producto[] = [
     id: 83,
     nombre: "LATTAFA PRIDE ART OF UNIVERSE EDP 100ML",
     categoria: "unisex",
-    precio: 30,
+    precio: 50,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1179,11 +1179,11 @@ export const productos: Producto[] = [
     id: 84,
     nombre: "LATTAFA ANGHAM EDP 100ML",
     categoria: "unisex",
-    precio: 28,
+    precio: 39,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1193,11 +1193,11 @@ export const productos: Producto[] = [
     id: 85,
     nombre: "LATTAFA MAYAR CHERRY INTENSE EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 30,
+    precio: 38,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -1207,11 +1207,11 @@ export const productos: Producto[] = [
     id: 86,
     nombre: "LATTAFA MAYAR NATURAL INTENSE EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 30,
+    precio: 35,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -1221,11 +1221,11 @@ export const productos: Producto[] = [
     id: 87,
     nombre: "LATTAFA PRIDE ISHQ AL SHUYUKH GOLD EDP 100ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 36,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1235,11 +1235,11 @@ export const productos: Producto[] = [
     id: 88,
     nombre: "LATTAFA PRIDE ISHQ AL SHUYUKH SILVER EDP 100ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 36,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1249,11 +1249,11 @@ export const productos: Producto[] = [
     id: 89,
     nombre: "NAUTICA VOYAGE EDT 100ML MEN",
     categoria: "caballero",
-    precio: 25,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1263,11 +1263,11 @@ export const productos: Producto[] = [
     id: 90,
     nombre: "NAUTICA VOYAGE SPORT EDT 100ML MEN",
     categoria: "caballero",
-    precio: 25,
+    precio: 29,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1277,11 +1277,11 @@ export const productos: Producto[] = [
     id: 91,
     nombre: "PARIS HILTON EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 20,
+    precio: 30,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -1291,11 +1291,11 @@ export const productos: Producto[] = [
     id: 92,
     nombre: "360 RED EDP 100ML MEN",
     categoria: "caballero",
-    precio: 22,
+    precio: 35,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1305,11 +1305,11 @@ export const productos: Producto[] = [
     id: 93,
     nombre: "RASASI HAWAS EDP 100ML MEN",
     categoria: "caballero",
-    precio: 35,
+    precio: 43,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media-Alta",
@@ -1319,11 +1319,11 @@ export const productos: Producto[] = [
     id: 94,
     nombre: "RASASI HAWAS ICE EDP 100ML",
     categoria: "unisex",
-    precio: 38,
+    precio: 54,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
@@ -1333,11 +1333,11 @@ export const productos: Producto[] = [
     id: 95,
     nombre: "RASASI HAWAS DIVA EDP 100ML WOMEN",
     categoria: "dama",
-    precio: 35,
+    precio: 59,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -1347,11 +1347,11 @@ export const productos: Producto[] = [
     id: 96,
     nombre: "RASASI HAWAS TROPICAL EDP 100ML",
     categoria: "unisex",
-    precio: 35,
+    precio: 54,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Baja-Media",
@@ -1361,14 +1361,85 @@ export const productos: Producto[] = [
     id: 97,
     nombre: "BLUE JEANS EDT 100ML MEN",
     categoria: "caballero",
-    precio: 20,
+    precio: 30,
     oldPrice: null,
     precioOferta: null,
     enOferta: false,
-    estadoEnvio: "proximamente",
+    estadoEnvio: "disponible",
     descripcion: `· Consulta precios al mayor para emprendedores.
 · Para pagos en bolívares consultar precio.`,
     intensidad: "Media",
     imagen: "https://i.ibb.co/N2n0VXHQ/e4d743724b10c1708fc6274aa172c106.jpg"
-  }
+  },
+  {
+    id: 98,
+    nombre: "ARMAF ODYSSEY MANDARIN SKY 3.4 EDP FOR MEN",
+    categoria: "caballero",
+    precio: 40,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Alta",
+    imagen: "https://i.ibb.co/FLfHbMrZ/3c8fd7a440947e819ff4bfe89cdd835b.jpg"
+  },
+  {
+
+    id: 100,
+    nombre: "LATTAFA KHAMRAH WAHA 100ML EDP SPRAY",
+    categoria: "unisex",
+    precio: 52,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Baja-Media",
+    imagen: "https://i.ibb.co/Vp0LfxPM/df5b3d1e-85ad-4f3c-948d-ecb22956829f.jpg"
+  },
+  {
+    id: 102,
+    nombre: "SWISS ARMY CLASSIC 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 47,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: ""
+  },
+  {
+    id: 103,
+    nombre: "SWISS ARMY ALTITUDE 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 44,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: ""
+  },
+  {
+    id: 104,
+    nombre: "NEW BRAND COMANDO 100ML CABALLERO",
+    categoria: "caballero",
+    precio: 17,
+    oldPrice: null,
+    precioOferta: null,
+    enOferta: false,
+    estadoEnvio: "disponible",
+    descripcion: `· Consulta precios al mayor para emprendedores.
+· Para pagos en bolívares consultar precio.`,
+    intensidad: "Media",
+    imagen: "https://i.pinimg.com/736x/d4/7a/6d/d47a6db54e4b090b3fcd3253bd24e7c6.jpg"
+  },
 ]

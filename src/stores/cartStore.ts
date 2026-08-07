@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 import type { Producto } from '../data/productos'
-import { TASA_CAMBIO, WHATSAPP_NUMERO } from '../data/config'
+import { WHATSAPP_NUMERO } from '../data/config'
+import { useCurrencyStore } from './currencyStore'
+import { pinia } from '../plugins/pinia'
 
 export interface CartItem extends Producto {
   cantidad: number
@@ -17,12 +19,29 @@ function hasLocalStorage(): boolean {
   }
 }
 
+function isValidCartItem(value: unknown): value is CartItem {
+  if (typeof value !== 'object' || value === null) return false
+  const v = value as Record<string, unknown>
+  return (
+    typeof v.id === 'number' &&
+    typeof v.nombre === 'string' &&
+    typeof v.categoria === 'string' &&
+    typeof v.precio === 'number' &&
+    typeof v.imagen === 'string' &&
+    typeof v.cantidad === 'number' &&
+    v.cantidad > 0
+  )
+}
+
 function loadCartFromStorage(): CartItem[] {
   if (!hasLocalStorage()) return []
   try {
     const stored = localStorage.getItem(CART_STORAGE_KEY)
     if (stored) {
-      return JSON.parse(stored)
+      const parsed: unknown = JSON.parse(stored)
+      if (Array.isArray(parsed)) {
+        return parsed.filter(isValidCartItem)
+      }
     }
   } catch (e) {
     console.warn('Error loading cart from localStorage:', e)
@@ -40,15 +59,10 @@ function saveCartToStorage(items: CartItem[]) {
 }
 
 export const useCartStore = defineStore('cart', () => {
+  const currencyStore = useCurrencyStore(pinia)
   // Inicializar con datos guardados
   const items = ref<CartItem[]>(loadCartFromStorage())
   const isOpen = ref(false)
-  const currentCurrency = ref<'USD' | 'BS'>(
-    hasLocalStorage()
-      ? (localStorage.getItem('preferred-currency') as 'USD' | 'BS') || 'USD'
-      : 'USD'
-  )
-  const tasaCambio = ref(TASA_CAMBIO)
   const toastMessage = ref('')
   const showVaciarConfirm = ref(false)
   let toastTimer: ReturnType<typeof setTimeout>
@@ -65,26 +79,13 @@ export const useCartStore = defineStore('cart', () => {
   )
 
   const totalPriceBS = computed(() =>
-    totalPriceUSD.value * tasaCambio.value
+    totalPriceUSD.value * currencyStore.tasaCambio
   )
 
   // Guardar en localStorage cada vez que cambien los items
   watch(items, (newItems) => {
     saveCartToStorage(newItems)
   }, { deep: true })
-
-  function setCurrency(currency: 'USD' | 'BS') {
-    currentCurrency.value = currency
-  }
-
-  function getPrecioFormateado(precioUSD: number): string {
-    if (currentCurrency.value === 'USD') {
-      return `$${precioUSD.toFixed(2)}`
-    } else {
-      const precioBS = (precioUSD * tasaCambio.value)
-      return `Bs. ${precioBS.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-    }
-  }
 
   function agregarAlCarrito(producto: Producto, cantidad = 1) {
     const existente = items.value.find(i => i.id === producto.id)
@@ -141,29 +142,23 @@ export const useCartStore = defineStore('cart', () => {
 
   function generarMensajeWhatsapp() {
     const numero = WHATSAPP_NUMERO
-    const moneda = currentCurrency.value === 'USD' ? 'USD' : 'Bs.'
-    
+    const enUSD = currencyStore.currency === 'USD'
+    const formatear = (precioUSD: number) => enUSD
+      ? `$${precioUSD.toFixed(2)}`
+      : `Bs. ${(precioUSD * currencyStore.tasaCambio).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+
     let mensaje = '🌸 *Hola, quiero realizar un pedido en Agape Collection Parfum:*\n\n'
 
     items.value.forEach(item => {
       const precioUSD = item.enOferta && item.precioOferta ? item.precioOferta : item.precio
-      const precioMoneda = currentCurrency.value === 'USD' 
-        ? `$${precioUSD.toFixed(2)}` 
-        : `Bs. ${(precioUSD * tasaCambio.value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
-      
-      const subtotalMoneda = currentCurrency.value === 'USD'
-        ? `$${(precioUSD * item.cantidad).toFixed(2)}`
-        : `Bs. ${(precioUSD * tasaCambio.value * item.cantidad).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
 
       mensaje += `▪️ *${item.nombre}*\n`
       mensaje += `   Cantidad: ${item.cantidad}\n`
-      mensaje += `   Precio unitario: ${precioMoneda}\n`
-      mensaje += `   Subtotal: ${subtotalMoneda}\n\n`
+      mensaje += `   Precio unitario: ${formatear(precioUSD)}\n`
+      mensaje += `   Subtotal: ${formatear(precioUSD * item.cantidad)}\n\n`
     })
 
-    const totalMoneda = currentCurrency.value === 'USD'
-      ? `$${totalPriceUSD.value.toFixed(2)}`
-      : `Bs. ${totalPriceBS.value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+    const totalMoneda = formatear(totalPriceUSD.value)
 
     mensaje += `💰 *Total: ${totalMoneda}*\n\n`
     mensaje += `Quedo atento/a para coordinar el pago y envío. ¡Gracias! 🙏`
@@ -178,12 +173,8 @@ export const useCartStore = defineStore('cart', () => {
     totalItems,
     totalPriceUSD,
     totalPriceBS,
-    currentCurrency,
-    tasaCambio,
     toastMessage,
     showVaciarConfirm,
-    getPrecioFormateado,
-    setCurrency,
     agregarAlCarrito,
     eliminarDelCarrito,
     cambiarCantidad,

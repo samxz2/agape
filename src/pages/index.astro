@@ -4,9 +4,31 @@ import ProductGrid from '../components/ProductGrid.vue'
 import { productos } from '../data/productos'
 
 const totalProductos = productos.length
+
+const ldData = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Colección de Perfumes — Agape Collection Parfum',
+  itemListElement: productos.map((p, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: p.nombre,
+    image: p.imagen,
+    offers: {
+      '@type': 'Offer',
+      price: String(p.enOferta && p.precioOferta ? p.precioOferta : p.precio),
+      priceCurrency: 'USD',
+      availability: p.estadoEnvio === 'disponible'
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/PreOrder'
+    }
+  }))
+}
 ---
 
 <Layout title="Agape Collection Parfum">
+  <script type="application/ld+json" set:html={JSON.stringify(ldData)} />
+
   <!-- HERO -->
   <section
     class="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden"

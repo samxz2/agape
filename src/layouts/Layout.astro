@@ -22,6 +22,15 @@ const { title = 'Agape Collection Parfum' } = Astro.props
     <meta name="theme-color" content="#ece0d4" />
     <title>{title}</title>
 
+    <!-- Social / Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Agape Collection Parfum - Fragancias exclusivas de lujo. Perfumes para caballero, damas, unisex y sets." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_VE" />
+    <meta property="og:image" content="https://i.ibb.co/CpHdX08t/1001879919.png" />
+    <meta name="twitter:card" content="summary" />
+    {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />}
+
     <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

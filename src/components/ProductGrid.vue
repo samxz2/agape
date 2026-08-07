@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { productos, type Producto } from '../data/productos'
 import ProductCard from './ProductCard.vue'
-import { Search, Grid3X3, ArrowUpDown, ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { Search, ArrowUpDown, ArrowUp, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 const ITEMS_PER_PAGE = 12
 
@@ -10,13 +10,15 @@ const categoriaActiva = ref('todos')
 const busqueda = ref('')
 const busquedaDebounced = ref('')
 const searchOpen = ref(false)
-const viewMode = ref<'grid' | 'list'>('grid')
-const soloOfertas = ref(false)
 type SortMode = 'default' | 'precio-asc' | 'precio-desc'
 const ordenPor = ref<SortMode>('default')
 const precioMin = ref<number | null>(null)
 const precioMax = ref<number | null>(null)
 const paginaActual = ref(1)
+
+function precioActual(p: Producto): number {
+  return p.enOferta && p.precioOferta ? p.precioOferta : p.precio
+}
 
 const countsPorCategoria = computed(() => {
   const counts: Record<string, number> = {}
@@ -87,35 +89,17 @@ const productosFiltrados = computed(() => {
     )
   }
 
-  if (soloOfertas.value) {
-    resultado = resultado.filter(p => p.enOferta)
+  if (typeof precioMin.value === 'number' && Number.isFinite(precioMin.value)) {
+    resultado = resultado.filter(p => precioActual(p) >= precioMin.value!)
   }
-
-  if (precioMin.value !== null) {
-    resultado = resultado.filter(p => {
-      const pr = p.enOferta && p.precioOferta ? p.precioOferta : p.precio
-      return pr >= precioMin.value!
-    })
-  }
-  if (precioMax.value !== null) {
-    resultado = resultado.filter(p => {
-      const pr = p.enOferta && p.precioOferta ? p.precioOferta : p.precio
-      return pr <= precioMax.value!
-    })
+  if (typeof precioMax.value === 'number' && Number.isFinite(precioMax.value)) {
+    resultado = resultado.filter(p => precioActual(p) <= precioMax.value!)
   }
 
   if (ordenPor.value === 'precio-asc') {
-    resultado = [...resultado].sort((a, b) => {
-      const pa = a.enOferta && a.precioOferta ? a.precioOferta : a.precio
-      const pb = b.enOferta && b.precioOferta ? b.precioOferta : b.precio
-      return pa - pb
-    })
+    resultado = [...resultado].sort((a, b) => precioActual(a) - precioActual(b))
   } else if (ordenPor.value === 'precio-desc') {
-    resultado = [...resultado].sort((a, b) => {
-      const pa = a.enOferta && a.precioOferta ? a.precioOferta : a.precio
-      const pb = b.enOferta && b.precioOferta ? b.precioOferta : b.precio
-      return pb - pa
-    })
+    resultado = [...resultado].sort((a, b) => precioActual(b) - precioActual(a))
   }
 
   return resultado
@@ -159,7 +143,6 @@ function limpiarFiltros() {
   categoriaActiva.value = 'todos'
   precioMin.value = null
   precioMax.value = null
-  soloOfertas.value = false
   ordenPor.value = 'default'
   paginaActual.value = 1
 }
@@ -194,15 +177,6 @@ function limpiarFiltros() {
             {{ ordenPor === 'default' ? 'Precio' : ordenPor === 'precio-asc' ? 'Menor' : 'Mayor' }}
           </span>
         </button>
-
-        <button
-          @click="viewMode = 'grid'"
-          :class="viewMode === 'grid' ? 'bg-gold-400 text-brown-800 border-gold-400' : 'bg-white text-brown-500 border-cream-200 hover:bg-cream-100'"
-          class="p-2 rounded-full transition-all text-sm border"
-          title="Vista cuadrícula"
-        >
-          <Grid3X3 :size="18" />
-        </button>
       </div>
 
       <!-- Price filter -->
@@ -223,7 +197,7 @@ function limpiarFiltros() {
           @input="paginaActual = 1"
         />
         <button
-          v-if="precioMin || precioMax || busqueda || categoriaActiva !== 'todos' || soloOfertas"
+          v-if="precioMin || precioMax || busqueda || categoriaActiva !== 'todos'"
           @click="limpiarFiltros"
           class="text-[10px] text-brown-400 hover:text-gold-500 px-2 py-1"
         >
@@ -244,7 +218,7 @@ function limpiarFiltros() {
     </div>
 
     <!-- Category Cards -->
-    <div v-if="categoriaActiva === 'todos' && !busquedaDebounced && !soloOfertas && !precioMin && !precioMax" class="mb-12">
+    <div v-if="categoriaActiva === 'todos' && !busquedaDebounced && !precioMin && !precioMax" class="mb-12">
       <div class="text-center mb-8">
         <h2 class="font-playfair text-2xl md:text-3xl text-brown-700 font-bold">Categorías</h2>
         <p class="text-brown-400 text-sm mt-1">Explora nuestra selección exclusiva</p>
@@ -300,9 +274,7 @@ function limpiarFiltros() {
     <div v-else>
       <TransitionGroup
         tag="div"
-        :class="viewMode === 'grid'
-          ? 'relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5'
-          : 'relative flex flex-col gap-3'"
+        class="relative grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"
         name="product-grid"
       >
         <ProductCard

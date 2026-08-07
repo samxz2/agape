@@ -1,18 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { TASA_CAMBIO } from '../data/config'
-import { useCartStore } from './cartStore'
-import { pinia } from '../plugins/pinia'
 
 export const useCurrencyStore = defineStore('currency', () => {
   // Estado
   const currency = ref<'USD' | 'BS'>('USD')
   const tasaCambio = ref(TASA_CAMBIO)
-  
+
   // Getters
   const isUSD = computed(() => currency.value === 'USD')
   const isBS = computed(() => currency.value === 'BS')
-  
+
   function hasLocalStorage(): boolean {
     try {
       return typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function'
@@ -27,19 +25,12 @@ export const useCurrencyStore = defineStore('currency', () => {
     if (hasLocalStorage()) {
       localStorage.setItem('preferred-currency', newCurrency)
     }
-    const cartStore = useCartStore(pinia)
-    cartStore.setCurrency(newCurrency)
   }
-  
+
   function toggleCurrency() {
-    currency.value = currency.value === 'USD' ? 'BS' : 'USD'
-    if (hasLocalStorage()) {
-      localStorage.setItem('preferred-currency', currency.value)
-    }
-    const cartStore = useCartStore(pinia)
-    cartStore.setCurrency(currency.value)
+    setCurrency(currency.value === 'USD' ? 'BS' : 'USD')
   }
-  
+
   function loadCurrencyFromStorage() {
     try {
       if (!hasLocalStorage()) return
@@ -51,7 +42,7 @@ export const useCurrencyStore = defineStore('currency', () => {
       console.warn('Error loading currency from localStorage:', e)
     }
   }
-  
+
   function convertirPrecio(precioUSD: number): string {
     if (currency.value === 'USD') {
       return `$${precioUSD.toFixed(2)}`
@@ -60,10 +51,10 @@ export const useCurrencyStore = defineStore('currency', () => {
       return `Bs. ${precioBS.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
     }
   }
-  
+
   // Cargar moneda guardada al inicializar
   loadCurrencyFromStorage()
-  
+
   return {
     // Estado
     currency,

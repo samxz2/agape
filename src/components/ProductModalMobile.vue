@@ -6,6 +6,7 @@ import { productos } from '../data/productos'
 import { FALLBACK_IMAGE } from '../data/constants'
 import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
+import { lockBodyScroll, unlockBodyScroll } from '../composables/useBodyScrollLock'
 
 const props = defineProps<{ producto: Producto }>()
 const emit = defineEmits(['close', 'add-to-cart'])
@@ -30,9 +31,13 @@ function sanitizeCantidad() {
 }
 
 function getPrecioActual(): number {
-  return props.producto.enOferta && props.producto.precioOferta 
-    ? props.producto.precioOferta 
+  return props.producto.enOferta && props.producto.precioOferta
+    ? props.producto.precioOferta
     : props.producto.precio
+}
+
+function getPrecioRelacionado(rel: Producto): number {
+  return rel.enOferta && rel.precioOferta ? rel.precioOferta : rel.precio
 }
 
 function addWithQuantity() {
@@ -50,12 +55,12 @@ function handleImageError(e: Event) {
 }
 
 onMounted(() => {
-  document.body.style.overflow = 'hidden'
+  lockBodyScroll()
   document.addEventListener('keydown', handleKeydown)
 })
 
 onUnmounted(() => {
-  document.body.style.overflow = ''
+  unlockBodyScroll()
   document.removeEventListener('keydown', handleKeydown)
 })
 
@@ -166,21 +171,21 @@ function handleKeydown(e: KeyboardEvent) {
         <div class="flex items-center justify-between">
           <span class="text-[11px] text-brown-500 font-medium">Cantidad:</span>
           <div class="flex items-center gap-1.5 bg-white rounded-full border border-cream-200/60 p-0.5">
-            <button 
-              @click="cantidad = Math.max(1, cantidad - 1)" 
+            <button
+              @click="cantidad = Math.max(1, cantidad - 1)"
               class="w-6 h-6 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Minus :size="10" />
             </button>
-            <input 
-              v-model.number="cantidad" 
-              type="number" 
+            <input
+              v-model.number="cantidad"
+              type="number"
               min="1"
               @blur="sanitizeCantidad"
               class="w-10 text-center font-bold text-brown-700 text-xs bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
-            <button 
-              @click="cantidad = cantidad + 1" 
+            <button
+              @click="cantidad = cantidad + 1"
               class="w-6 h-6 rounded-full bg-cream-100 hover:bg-cream-200 flex items-center justify-center text-brown-600 font-bold transition-colors"
             >
               <Plus :size="10" />
@@ -214,7 +219,7 @@ function handleKeydown(e: KeyboardEvent) {
               </div>
               <div class="p-1.5">
                 <p class="text-[9px] text-brown-700 font-semibold leading-tight line-clamp-1">{{ rel.nombre }}</p>
-                <p class="text-[9px] text-brown-500 font-bold">{{ currencyStore.convertirPrecio(rel.precio) }}</p>
+                <p class="text-[9px] text-brown-500 font-bold">{{ currencyStore.convertirPrecio(getPrecioRelacionado(rel)) }}</p>
               </div>
             </button>
           </div>

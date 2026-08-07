@@ -31,6 +31,11 @@ function handleScroll() {
 }
 
 function irACategoria(cat: string) {
+  // Las categorías solo existen en la home: si estamos en otra página, navegar ahí.
+  if (window.location.pathname !== '/') {
+    window.location.href = `/?categoria=${encodeURIComponent(cat)}`
+    return
+  }
   const url = new URL(window.location.href)
   url.searchParams.set('categoria', cat)
   url.searchParams.delete('buscar')
@@ -40,12 +45,18 @@ function irACategoria(cat: string) {
 }
 
 function buscar() {
-  if (searchQuery.value.trim()) {
+  const query = searchQuery.value.trim()
+  if (query) {
+    // La búsqueda solo existe en la home: si estamos en otra página, navegar ahí.
+    if (window.location.pathname !== '/') {
+      window.location.href = `/?buscar=${encodeURIComponent(query)}`
+      return
+    }
     const url = new URL(window.location.href)
-    url.searchParams.set('buscar', searchQuery.value)
+    url.searchParams.set('buscar', query)
     url.searchParams.delete('categoria')
     window.history.pushState({}, '', url.toString())
-    window.dispatchEvent(new CustomEvent('buscar-change', { detail: searchQuery.value }))
+    window.dispatchEvent(new CustomEvent('buscar-change', { detail: query }))
     searchOpen.value = false
   }
 }

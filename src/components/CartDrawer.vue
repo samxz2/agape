@@ -5,6 +5,7 @@ import { useCurrencyStore } from '../stores/currencyStore'
 import { pinia } from '../plugins/pinia'
 import { FALLBACK_IMAGE } from '../data/constants'
 import { X, Trash2, Plus, Minus, ShoppingBag, MessageCircle, Shield, Truck } from 'lucide-vue-next'
+import { lockBodyScroll, unlockBodyScroll } from '../composables/useBodyScrollLock'
 
 const cart = useCartStore(pinia)
 const currencyStore = useCurrencyStore(pinia)
@@ -26,7 +27,8 @@ onMounted(() => document.addEventListener('keydown', handleKeydown))
 onUnmounted(() => document.removeEventListener('keydown', handleKeydown))
 
 watch(() => cart.isOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
+  if (open) lockBodyScroll()
+  else unlockBodyScroll()
 })
 </script>
 
